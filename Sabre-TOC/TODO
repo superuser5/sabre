@@ -1,0 +1,23 @@
+# TODO
+
+Need to work these errors from 2to3
+
+RefactoringTool: There were 17 errors:
+RefactoringTool: Can't parse ./database.yml: ParseError: bad input: type=4, value='\n', context=('', (1, 11))
+RefactoringTool: Can't parse ./fedora-install.sh: ParseError: bad input: type=3, value="'''\nRun as ROOT!!! and Requires MSF and Empire to be installed before hand for now.\nMSF and Empire will be added to the installer soon!\n'''", context=(' ', (3, 5))
+RefactoringTool: Can't parse ./install.sh: ParseError: bad input: type=3, value="'''\nRun as ROOT!!! and Requires MSF and Empire to be installed before hand for now.\nMSF and Empire will be added to the installer soon!\n'''", context=(' ', (3, 5))
+RefactoringTool: Can't parse ./nohup.out: ParseError: bad input: type=20, value='<', context=('', (1, 0))
+RefactoringTool: Can't parse ./pip-install-me.txt: ParseError: bad input: type=2, value='.9', context=('', (2, 9))
+RefactoringTool: Can't parse ./README.txt: ParseError: bad input: type=1, value='add', context=(' ', (1, 5))
+RefactoringTool: Can't parse ./requirements.txt: ParseError: bad input: type=4, value='\n', context=('', (1, 4))
+RefactoringTool: Can't parse ./resources.txt: ParseError: bad input: type=48, value='//', context=('', (1, 6))
+RefactoringTool: Can't parse ./run-installer.sh: ParseError: bad input: type=17, value='/', context=('', (5, 10))
+RefactoringTool: Can't parse ./sabre-connections.service: ParseError: bad input: type=1, value='Miscellaneous', context=(' ', (2, 15))
+RefactoringTool: Can't parse ./sabre-msfd.service: ParseError: bad input: type=1, value='Miscellaneous', context=(' ', (2, 15))
+RefactoringTool: Can't parse ./sabre-native-connections.service: ParseError: bad input: type=1, value='Miscellaneous', context=(' ', (2, 15))
+RefactoringTool: Can't parse ./sabres-old.txt: ParseError: bad input: type=5, value='    ', context=('\n      #######                 /\n', (3, 0))
+RefactoringTool: Can't parse ./sabres.txt: ParseError: bad input: type=5, value='                ', context=('\n\n\n', (4, 0))
+RefactoringTool: Can't parse ./structure.txt: ParseError: bad input: type=4, value='\n', context=('', (1, 10))
+RefactoringTool: Can't parse ./update.sh: ParseError: bad input: type=32, value='~', context=(' ', (4, 3))
+RefactoringTool: Can't parse ./userman.txt: ParseError: bad input: type=1, value='_relative_load', context=(' ', (1, 9))
+

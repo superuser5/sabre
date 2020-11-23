@@ -1,0 +1,9 @@
+https://kushaldas.in/posts/developing-command-line-interpreters-using-python-cmd2.html
+http://www.techbeamers.com/python-multithreading-concepts/
+
+Over Arching C2 infrastructure is the HQ
+C2 Server = SABRE
+C2 Client = OC 				#Officer Commander
+#Individual AP workspace = Sabre's 	#A,B,C,D,
+Payloads = Operators 			#Payloads
+Modules = Troops 			#Elemets to take action

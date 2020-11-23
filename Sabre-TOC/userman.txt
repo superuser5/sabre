@@ -1,0 +1,190 @@
+OC: help _relative_load
+Runs commands in script file that is encoded as either ASCII or UTF-8 text.
+
+    Usage:  _relative_load <file_path>
+
+    optional argument:
+    file_path   a file path pointing to a script
+
+Script should contain one command per line, just like command would be typed in console.
+
+If this is called from within an already-running script, the filename will be interpreted
+relative to the already-running script's directory.
+
+NOTE: This command is intended to only be used within text file scripts.
+
+OC: help auxiliary
+Go to the Auxiliary Tools Menu
+
+OC: help checkdb
+Check for connectivity to the DB
+
+OC: help cmdenvironment
+Summary report of interactive parameters.
+OC: cmdenvironment 
+
+        Commands are case-sensitive: False
+        Commands may be terminated with: [';']
+        Arguments at invocation allowed: True
+        Output redirection and pipes allowed: True
+        Parsing of @options commands:
+            Shell lexer mode for command argument splitting: non-POSIX
+            Strip Quotes after splitting arguments: True
+            Argument type: List of argument strings
+
+OC: help edit
+Edit a file or command in a text editor.
+
+The editor used is determined by the ``editor`` settable parameter.
+"set editor (program-name)" to change or set the EDITOR environment variable.
+
+The optional arguments are mutually exclusive.  Either a command number OR a file name can be supplied.
+If neither is supplied, the most recent command in the history is edited.
+
+Edited commands are always run after the editor is closed.
+
+Edited files are run on close if the ``autorun_on_edit`` settable parameter is True.
+
+Usage: edit [N]|[file_path]
+    * N         - Number of command (from history), or `*` for all commands in history (default: last command)
+    * file_path - path to a file to open in editor
+
+Options:
+  -h, --help  show this help message and exit
+
+OC: help exit
+Exit Sabre-TOC
+
+
+OC: help help
+List available commands with "help" or detailed help with "help cmd".
+
+
+OC: help history
+history [arg]: lists past commands issued
+
+        | no arg:         list all
+        | arg is integer: list one history item, by index
+        | a..b, a:b, a:, ..b -> list history items by a span of indices (inclusive)
+        | arg is string:  list all commands matching string search
+        | arg is /enclosed in forward-slashes/: regular expression search
+        
+Usage: history [options] (limit on which commands to include)
+
+Options:
+  -h, --help    show this help message and exit
+  -s, --script  Script format; no separation lines
+
+OC: help intel
+Go to the Intel menu
+
+OC: help killsession
+Kill an existing session: msfconsole1 or empire1 etc..
+
+OC: help listener
+Go to the listener menu
+
+OC: help lm_intel
+Go to the LMIntel menu
+
+OC: help load
+Runs commands in script file that is encoded as either ASCII or UTF-8 text.
+
+    Usage:  load <file_path>
+
+    * file_path - a file path pointing to a script
+
+Script should contain one command per line, just like command would be typed in console.
+
+OC: help operator
+Go to the operator menu
+
+
+OC: help quit
+Exits this application.
+
+OC: help run
+run [arg]: re-runs an earlier command
+
+    no arg                               -> run most recent command
+    arg is integer                       -> run one history item, by index
+    arg is string                        -> run most recent command by string search
+    arg is /enclosed in forward-slashes/ -> run most recent by regex
+
+OC: help save
+Saves command(s) from history to file.
+
+    Usage:  save [N] [file_path]
+
+    * N         - Number of command (from history), or `*` for all commands in history (default: last command)
+    * file_path - location to save script of command(s) to (default: value stored in temporary file)
+
+
+OC: help set
+Sets a settable parameter.
+
+        Accepts abbreviated parameter names so long as there is no ambiguity.
+        Call without arguments for a list of settable parameters with their values.
+
+
+OC: help shell
+Execute a command as if at the OS prompt.
+
+    Usage:  shell <command> [arguments]
+    *alternatively you can prefix a command with '!' to run shell commands
+
+
+OC: help shortcuts
+Lists shortcuts (aliases) available.
+
+
+
+OC: help show
+Shows value of a parameter.
+Usage: show [options] arg
+
+Options:
+  -h, --help  show this help message and exit
+  -l, --long  describe function of parameter
+
+
+OC: help tpt
+Go to the TPT menu
+
+
+OC-Third-Party-Tools: help empire
+Start a Empire Session
+*Only one session per TOC
+
+
+OC-Third-Party-Tools: help external
+Start a any External Tool Session
+
+
+OC-Third-Party-Tools: help msfconsole
+Start a MSFCONSOLE Session
+
+
+OC-Third-Party-Tools: help ptf
+Start a PTF Session
+
+
+OC-AUX: help syslogdiscover
+
+Usage: syslogDiscover <PCAP FILE TO PARSE>
+
+This Tool was developed to identify Splunk instances on the network with out network scanning tools such as:
+        -nmap
+        -zenmap
+        -etc...
+
+    This sould be ran with a PCAP file generated filtering only for SYSLOG traffic port 514
+
+    Example: tcpdump -s 65535 -i ens33 port 514 -w syslog-514.pcap
+
+
+
+OC-Intel: help brief
+Print Link to Open Source Threat Intel
+
+

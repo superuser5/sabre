@@ -1,0 +1,10 @@
+## TODO
+
+Need to look into these errors from the 2to3 run.
+
+RefactoringTool: There were 3 errors:
+RefactoringTool: Can't parse ./examples/pozzo_n_lucky/stego_config.py: ParseError: bad input: type=11, value=':', context=('', (3, 8))
+RefactoringTool: Can't parse ./makefile: ParseError: bad token: type=58, value='$', context=('', (2, 3))
+RefactoringTool: Can't parse ./README.md: ParseError: bad token: type=58, value='!', context=('', (4, 1))
+
+
