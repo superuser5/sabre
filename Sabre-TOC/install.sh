@@ -27,7 +27,7 @@ mkdir -p /home/root/.sabre/
 
 apt update
 sleep 2
-apt install -y redis-server python-redis openssh-server nmap git python-pip3 openssh-server screen tmux moreutils #oracle-java8-installer if we add MSF back to the main installer
+apt install -y redis-server python-redis openssh-server nmap git python-pip3 openssh-server screen tmux moreutils python3-venv #oracle-java8-installer if we add MSF back to the main installer
 sleep 2
 ##apt-get update
 apt upgrade

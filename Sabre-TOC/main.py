@@ -1,6 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
-from cmd2 import Cmd, make_option, options
+from cmd2 import Cmd, with_argparser #, options
 import commands
 import redis
 import os
@@ -101,11 +101,6 @@ class HQ(Cmd):
                 sub_cmd = intel()
                 sub_cmd.cmdloop()
 
-        def do_lm_intel(self, arg):
-                "Go to the LMIntel menu"
-                sub_cmd = lmintel()
-                sub_cmd.cmdloop()
-
 	def do_auxiliary(self, arg):
 		"Go to the Auxiliary Tools Menu"
 		sub_cmd = auxiliary()
@@ -149,11 +144,6 @@ class listeners(Cmd):
                 sub_cmd = intel()
                 sub_cmd.cmdloop()
 
-        def do_lm_intel(self, arg):
-                "Go to the LMIntel menu"
-                sub_cmd = lmintel()
-                sub_cmd.cmdloop()
-
         def do_auxiliary(self, arg):
                 "Go to the Auxiliary Tools Menu"
                 sub_cmd = auxiliary()
@@ -176,8 +166,10 @@ class listeners(Cmd):
 #		for i in result:
 #			print str(i) 
 
-	@options([make_option('-p', '--lport', action="store_true", help ="Listening Port"),
-		make_option('-l', '--lhost', action="store_true", help ="Listening Host")])
+        argparserlistener = argparse.ArgumentParser()
+        argparserlistener.add_argument('-p', '--lport', action="store_true", help='Listening Port')
+        argparserlistener.add_argument('l', '--lhost', action='store_true', help='Listening Host')
+        @with_argparser(argparserlistener)
 	def do_start_listener(self, args, opts=None):
 		'Generates Basic LISTENER: listener -p 443 -l 0.0.0.0'
 		print args
@@ -341,11 +333,6 @@ class TPT(Cmd):
                 sub_cmd = intel()
                 sub_cmd.cmdloop()
 
-        def do_lm_intel(self, arg):
-                "Go to the LMIntel menu"
-                sub_cmd = lmintel()
-                sub_cmd.cmdloop()
-
         def do_auxiliary(self, arg):
                 "Go to the Auxiliary Tools Menu"
                 sub_cmd = auxiliary()
@@ -382,11 +369,6 @@ class operator(Cmd):
                 sub_cmd = Intel()
                 sub_cmd.cmdloop()
 
-        def do_lm_intel(self, arg):
-                "Go to the LMIntel menu"
-                sub_cmd = lmintel()
-                sub_cmd.cmdloop()
-
         def do_auxiliary(self, arg):
                 "Go to the Auxiliary Tools Menu"
                 sub_cmd = auxiliary()
@@ -411,7 +393,7 @@ class operator(Cmd):
 
 class intel(Cmd):
         prompt = 'OC-Intel: '
-        intro = "Who Dares Wins: Who Knows Wins"
+        intro = "Who Dares Wins: Who Knows Wins - Under Development"
 
         def __init__(self): #, teamserver):
                 Cmd.__init__(self)
@@ -434,11 +416,6 @@ class intel(Cmd):
         def do_operator(self, arg):
                 "Go to the operator menu"
                 sub_cmd = operator()
-                sub_cmd.cmdloop()
-
-        def do_lm_intel(self, arg):
-                "Go to the LMIntel menu"
-                sub_cmd = lmintel()
                 sub_cmd.cmdloop()
 
         def do_auxiliary(self, arg):
@@ -464,53 +441,6 @@ class intel(Cmd):
                         print "Disconnected"
 
 ###### ALIASES ######
-
-class lmintel(Cmd):
-        prompt = 'OC-LMI: '
-        intro = """Who Dares Wins: Who Knows Best Wins
-This is a place holder for adding LM-Cert, SIC/SOC Threat Intel"""
-
-        def __init__(self): #, teamserver):
-                Cmd.__init__(self)
-                #self.ts = teamserver
-
-	def do_exit(self, arg):
-		"Exit SABRE-OC"
-		quit()
-
-        def do_listener(self, arg):
-                "Go to the listener menu"
-                sub_cmd = listeners()
-                sub_cmd.cmdloop()
-
-        def do_tpt(self, arg):
-                "Go to the TPT menu"
-                sub_cmd = TPT()
-                sub_cmd.cmdloop()
-
-        def do_operator(self, arg):
-                "Go to the operator menu"
-                sub_cmd = operator()
-                sub_cmd.cmdloop()
-
-        def do_intel(self, arg):
-                "Go to the Intel menu"
-                sub_cmd = intel()
-                sub_cmd.cmdloop()
-
-        def do_auxiliary(self, arg):
-                "Go to the Auxiliary Tools Menu"
-                sub_cmd = auxiliary()
-                sub_cmd.cmdloop()
-
-        def do_checkdb(self, arg):
-                "Check for connectivity to the DB"
-                global r
-                value = r.info()
-                if value:
-                        print "Connected!"
-                else:
-                        print "Disconnected"
 
 class auxiliary(Cmd):
         prompt = 'OC-AUX: '
@@ -545,11 +475,6 @@ This is a place holder for adding Auxiliary modules such as Exfil Tools"""
                 sub_cmd = intel()
                 sub_cmd.cmdloop()
 
-        def do_lm_intel(self, arg):
-                "Go to the LMIntel Menu"
-                sub_cmd = lmintel()
-                sub_cmd.cmdloop()
-
         def do_syslogdiscover(self, arg):
        		"""
 Usage: syslogDiscover <PCAP FILE TO PARSE>
@@ -563,8 +488,7 @@ This Tool was developed to identify Splunk instances on the network with out net
 
     Example: tcpdump -s 65535 -i ens33 port 514 -w syslog-514.pcap
 
-    Author: Austin James Scott
-    Email: austin.j.scott@lmco.com
+    Author: Aidden Laoch
 
     		"""
     		p = raw_input('Specify probable SYSLOG port used [514]: ') or '514'

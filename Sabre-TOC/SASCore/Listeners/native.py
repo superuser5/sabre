@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
 #			 Disclaimer!
 #	 This code is not an optimal HTTP reverse shell!
