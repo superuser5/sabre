@@ -49,7 +49,7 @@ class HQ(Cmd):
 
 	def do_list_sessions(self, cmd):
 		'Get Running Listeners'
-	 	print('Getting Running Listeners')
+		print('Getting Running Listeners')
 	   	try:
 			l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
 			li = l.split('\n')
