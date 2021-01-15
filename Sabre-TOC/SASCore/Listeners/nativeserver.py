@@ -7,7 +7,7 @@ import subprocess
 class native():
 
 	def __init__(self, teamserver, HOST, PORT):
-			self.ts = teamserver
+		self.ts = teamserver
 		self.h = HOST
 		self.p = PORT
 		self.lid = "%s:%s" % (HOST,PORT)
