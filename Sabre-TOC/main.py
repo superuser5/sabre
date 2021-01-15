@@ -168,7 +168,7 @@ class listeners(Cmd):
 
 	argparserlistener = argparse.ArgumentParser()
 	argparserlistener.add_argument('-p', '--lport', action="store_true", help='Listening Port')
-	argparserlistener.add_argument('l', '--lhost', action='store_true', help='Listening Host')
+	argparserlistener.add_argument('-l', '--lhost', action='store_true', help='Listening Host')
 	@with_argparser(argparserlistener)
 	def do_start_listener(self, args, opts=None):
 		'Generates Basic LISTENER: listener -p 443 -l 0.0.0.0'
