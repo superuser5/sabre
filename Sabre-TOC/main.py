@@ -490,7 +490,7 @@ This Tool was developed to identify Splunk instances on the network with out net
     Author: Aidden Laoch
 
     		"""
-    		p = input('Specify probable SYSLOG port used [514]: ') or '514'
+		p = input('Specify probable SYSLOG port used [514]: ') or '514'
     		cap = input('Specify pcap file to parse [pcap.pcap]: ') or 'pcap.pcap'
     		TCP_REVERSE = dict((TCP_SERVICES[k], k) for k in list(TCP_SERVICES.keys()))
     		try:
