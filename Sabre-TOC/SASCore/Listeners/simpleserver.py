@@ -7,7 +7,7 @@ import subprocess
 class simple():
 
 	def __init__(self, teamserver, HOST, PORT):
-        	self.ts = teamserver
+			self.ts = teamserver
 		self.h = HOST
 		self.p = PORT
 		self.lid = "%s:%s" % (HOST,PORT)
@@ -27,30 +27,30 @@ class simple():
 	def screenSimple(self):
 		print('Starting the simple listener in session')
 		try:
-                	l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
-                	li = l.split('\n')
-                	n = []
-                	for i in li:
-                        	if 'simple' in i:
-                                	n.append(i.split('simple')[1])
-                	c = 0
-                	nu = []
-                	for i in n:
-                        	if ':' not in i[0]:
-                                	nu.append(i[0])
-                        	else:
-                                	nu.append(str(0))
-                	if nu:
-                        	nn = str(int(max(nu)) + 1)
+					l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
+					li = l.split('\n')
+					n = []
+					for i in li:
+							if 'simple' in i:
+									n.append(i.split('simple')[1])
+					c = 0
+					nu = []
+					for i in n:
+							if ':' not in i[0]:
+									nu.append(i[0])
+							else:
+									nu.append(str(0))
+					if nu:
+							nn = str(int(max(nu)) + 1)
 		except:
 			l = 'empty' #No sessions
-                # high number 
-                if 'simple' in l:
-                        print('already have one')
-                        subprocess.call(['/bin/bash', '-c', 'tmux new -s simple%d "clear && /opt/Sabre-TOC/SASCore/Listeners/simple.py %s %s"' % (int(nn), self.h, self.p)])
-                        print('simple%d' % int(nn))
-                else:
-                        subprocess.call(['/bin/bash', '-c', 'tmux new -s simple "clear && /opt/Sabre-TOC/SASCore/Listeners/simple.py %s %s"' % (self.h, self.p)])
+				# high number 
+				if 'simple' in l:
+						print('already have one')
+						subprocess.call(['/bin/bash', '-c', 'tmux new -s simple%d "clear && /opt/Sabre-TOC/SASCore/Listeners/simple.py %s %s"' % (int(nn), self.h, self.p)])
+						print('simple%d' % int(nn))
+				else:
+						subprocess.call(['/bin/bash', '-c', 'tmux new -s simple "clear && /opt/Sabre-TOC/SASCore/Listeners/simple.py %s %s"' % (self.h, self.p)])
 
 	def startSimple(self): # Template to start migrating simple over to REDIS
 		#HOST = ''                 # '' means bind to all interfaces
@@ -93,7 +93,7 @@ class simple():
 				conn.send(str(command)) 
 				break
 			# if we specify back then break out of loop and close socket
-                        if command == "back ": break
+						if command == "back ": break
 			# receive output from linux command
 			data = conn.recv(1024)
 			# print the output of the linux command

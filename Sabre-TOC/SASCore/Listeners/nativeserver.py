@@ -7,7 +7,7 @@ import subprocess
 class native():
 
 	def __init__(self, teamserver, HOST, PORT):
-        	self.ts = teamserver
+			self.ts = teamserver
 		self.h = HOST
 		self.p = PORT
 		self.lid = "%s:%s" % (HOST,PORT)
@@ -27,30 +27,30 @@ class native():
 	def screenNative(self):
 		print('Starting the native listener in session')
 		try:
-                	l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
-                	li = l.split('\n')
-                	n = []
-                	for i in li:
-                        	if 'native' in i:
-                                	n.append(i.split('native')[1])
-                	c = 0
-                	nu = []
-                	for i in n:
-                        	if ':' not in i[0]:
-                                	nu.append(i[0])
-                        	else:
-                                	nu.append(str(0))
-                	if nu:
-                        	nn = str(int(max(nu)) + 1)
+					l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
+					li = l.split('\n')
+					n = []
+					for i in li:
+							if 'native' in i:
+									n.append(i.split('native')[1])
+					c = 0
+					nu = []
+					for i in n:
+							if ':' not in i[0]:
+									nu.append(i[0])
+							else:
+									nu.append(str(0))
+					if nu:
+							nn = str(int(max(nu)) + 1)
 		except:
 			l = 'empty' #No sessions
-                # high number 
-                if 'native' in l:
-                        print('already have one')
-                        subprocess.call(['/bin/bash', '-c', 'tmux new -s native%d "clear && /opt/Sabre-TOC/SASCore/Listeners/native.py %s"' % (int(nn), self.p)])
-                        print('simple%d' % int(nn))
-                else:
-                        subprocess.call(['/bin/bash', '-c', 'tmux new -s native "clear && /opt/Sabre-TOC/SASCore/Listeners/native.py %s"' % self.p])
+				# high number 
+				if 'native' in l:
+						print('already have one')
+						subprocess.call(['/bin/bash', '-c', 'tmux new -s native%d "clear && /opt/Sabre-TOC/SASCore/Listeners/native.py %s"' % (int(nn), self.p)])
+						print('simple%d' % int(nn))
+				else:
+						subprocess.call(['/bin/bash', '-c', 'tmux new -s native "clear && /opt/Sabre-TOC/SASCore/Listeners/native.py %s"' % self.p])
 
 	def startNative(self): # Template to start migrating simple over to REDIS
 		#HOST = ''                 # '' means bind to all interfaces
@@ -93,7 +93,7 @@ class native():
 				conn.send(str(command)) 
 				break
 			# if we specify back then break out of loop and close socket
-                        if command == "back ": break
+						if command == "back ": break
 			# receive output from linux command
 			data = conn.recv(1024)
 			# print the output of the linux command

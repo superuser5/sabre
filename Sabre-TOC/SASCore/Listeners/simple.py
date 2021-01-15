@@ -9,7 +9,7 @@ import sys
 class simple():
 
 	def __init__(self, teamserver, HOST, PORT):
-        	self.ts = teamserver
+			self.ts = teamserver
 		self.h = HOST
 		self.p = PORT
 		self.lid = "%s:%s" % (HOST,PORT)
@@ -67,7 +67,7 @@ class simple():
 				conn.send(str(command)) 
 				break
 			# if we specify back then break out of loop and close socket
-                        if command == "back ": break
+						if command == "back ": break
 			# receive output from linux command
 			data = conn.recv(1024)
 			# print the output of the linux command
