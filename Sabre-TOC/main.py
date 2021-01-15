@@ -29,10 +29,9 @@ class HQ(Cmd):
 	prompt = 'OC: '
 	intro = "Who Dares Wins"
 
-	def __init__(self): #, teamserver):
+	def __init__(self):
 		Cmd.__init__(self)
-		#self.ts = teamserver
-		#print self.ts
+
 
 	def do_exit(self, arg):
 		"Exit Sabre-TOC"
