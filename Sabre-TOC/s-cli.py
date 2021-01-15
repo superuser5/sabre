@@ -9,7 +9,7 @@ import re
 import pexpect, struct, fcntl, termios, signal
 import string
 import subprocess
-import sh
+#import sh
 #from multiprocessing import Process
 
 u = subprocess.getstatusoutput('whoami')[1]
@@ -30,8 +30,6 @@ def sigwinch_passthrough (sig, data):
     s = struct.pack("HHHH", 0, 0, 0, 0)
     a = struct.unpack('hhhh', fcntl.ioctl(sys.stdout.fileno(),
         termios.TIOCGWINSZ , s))
-    #if not s.closed:
-    #    s.setwinsize(a[0],a[1])
 
 def escape_ansi(line):
     ansi_escape = re.compile(r'(\x9B|\x1B\[)[0-?]*[ -\/]*[@-~]')
@@ -55,14 +53,9 @@ def userCmdLog(cmd):
         if setPrompt == 'session_':
             pmt = setPrompt+cm+':'
             setPrompt = ''
-            #print('Set prompt to the specific session.')
-            #print('Should be this: %s' % cm[:-1])
         if cm == 'sessions' or cm == 'ses' or cm == 'sess' or cm == 'sessi' or cm == 'sessio' or cm == 'session':
             setPrompt = 'session_'
-            #print('set session for prompt')
-        #cm = '\n'+str(ti)+' '+str(u)+':'+' '+pmt+' '+str(cm)+';;;\n'
         cm = str(ti)+' '+str(u)+':'+' '+pmt+' '+str(cm)
-        #f.write(cm)
         if init == False:
             logme = logme + '\n    <\output>\n<\command>'
             parse = logme.split('\n')
@@ -76,7 +69,6 @@ def userCmdLog(cmd):
         logme = logme + '\n<command>    %s\n    <output>' % cm
     else:
         c.append(cmd)
-    #f.flush()
     return cmd
 
 def outputCmdLog(cmd):
@@ -87,39 +79,10 @@ def outputCmdLog(cmd):
     ti = strftime("%d-%m-%Y %H:%M:%S", localtime())
     if 'OC' not in cm:
         if '\n' in cm or '\r' in cm:
-            #f.write(cm)
             logme = logme + '%s' % cm
     elif 'OC' in cm:
         pmt = cm.split('\n')[0]
     return cmd
-
-
-
-###  This is to start the background logging of all connections to the team server that are SSH
-###  clients.
-#def sabreConnFunc():
-#    try:
-#            sabreConn = subprocess.check_output('sudo ps -eaf |grep sabre-connection | grep -v grep', shell=True)
-#            print(sabreConn)
-#    except:
-#            sabreConn = subprocess.check_output('sudo nohup /opt/Sabre-TOC/sabre-connections.py &', shell=True)
-#            print(sabreConn)
-#    return sabreConn
-#
-#
-###  This is to start the background logging of all connections to the team server that are not SSH
-###  but targets reaching back to the server. Eventually this need to also track any new routes placed.
-#def sabreNativeConnFunc():
-#    try:
-#            sabreNativeConn = subprocess.check_output('sudo ps -eaf |grep sabre-native-connection | grep -v grep', shell=True)
-#            print(sabreNativeConn)
-#    except:
-#            sabreNativeConn = subprocess.check_output('sudo nohup /opt/Sabre-TOC/sabre-native-connections.py &', shell=True)
-#            print(sabreNativeConn)
-#    return sabreNativeConn
-#
-
-
 
 os.system('clear')
 b = subprocess.getstatusoutput('cat /opt/Sabre-TOC/sabres.txt')
