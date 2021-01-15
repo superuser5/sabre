@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from cmd2 import Cmd, with_argparser #, options
+import argparse
 import subprocess
 import redis
 import os
