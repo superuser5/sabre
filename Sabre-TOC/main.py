@@ -50,13 +50,13 @@ class HQ(Cmd):
 	def do_list_sessions(self, cmd):
 		'Get Running Listeners'
 		print('Getting Running Listeners')
-	   	try:
+		try:
 			l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
 			li = l.split('\n')
 			print('Remember to select a session all you need is the listener ID (msfconsole# or empire#)')
 			for i in li:
 				print(i)
-	    	except:
+		except:
 			print('No Active Sessions')
 		    
 	def do_killsession(self, cmd):
