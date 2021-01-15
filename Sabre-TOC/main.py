@@ -37,9 +37,9 @@ class HQ(Cmd):
 		"Exit Sabre-TOC"
 		quit()
 
-        def do_reset(self, arg):
-                "Reset Sabre-TOC Screen Size"
-                os.system(reset)
+	def do_reset(self, arg):
+		"Reset Sabre-TOC Screen Size"
+		os.system(reset)
 
 
 	def do_listener(self, arg):
@@ -48,42 +48,42 @@ class HQ(Cmd):
 		sub_cmd.cmdloop()
 
     	def do_list_sessions(self, cmd):
-        	'Get Running Listeners'
-         	print('Getting Running Listeners')
-           	try:
-                	l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
-                	li = l.split('\n')
-                	print('Remember to select a session all you need is the listener ID (msfconsole# or empire#)')
-                	for i in li:
-                		print(i)
-            	except:
-                	print('No Active Sessions')
-                    
-        def do_killsession(self, cmd):
-                'Kill an existing session: msfconsole1 or empire1 etc..'
+		'Get Running Listeners'
+	 	print('Getting Running Listeners')
+	   	try:
+			l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
+			li = l.split('\n')
+			print('Remember to select a session all you need is the listener ID (msfconsole# or empire#)')
+			for i in li:
+				print(i)
+	    	except:
+			print('No Active Sessions')
+		    
+	def do_killsession(self, cmd):
+		'Kill an existing session: msfconsole1 or empire1 etc..'
 		try:
-                	l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
-                	li = l.split('\n')
-                	print('Remember to select a session. all you need is the listener ID (msfconsole# or empire#)')
-                	for i in li:
-                        	print(i)
-                	s = input('Enter in session ID: ')
-                	subprocess.call(['tmux', 'kill-session', '-t', s])
+			l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
+			li = l.split('\n')
+			print('Remember to select a session. all you need is the listener ID (msfconsole# or empire#)')
+			for i in li:
+				print(i)
+			s = input('Enter in session ID: ')
+			subprocess.call(['tmux', 'kill-session', '-t', s])
 		except:
 			print('No Active Sessions')
 
-        def do_sessions(self, cmd):
-                'Interact with an existing session: msfconsole1 or empire1 etc..'
-                try:
-                        l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
-                        li = l.split('\n')
-                        print('Remember to select a session all you need is the listener ID (msfconsole# or empire#)')
-                        for i in li:
-                                print(i)
-                        s = input('Enter in session ID: ')
-                        subprocess.call(['tmux', 'attach', '-t', s])
-                except:
-                        print('No Active Sessions')
+	def do_sessions(self, cmd):
+		'Interact with an existing session: msfconsole1 or empire1 etc..'
+		try:
+			l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
+			li = l.split('\n')
+			print('Remember to select a session all you need is the listener ID (msfconsole# or empire#)')
+			for i in li:
+				print(i)
+			s = input('Enter in session ID: ')
+			subprocess.call(['tmux', 'attach', '-t', s])
+		except:
+			print('No Active Sessions')
 
 	def do_tpt(self, arg):
 		"Go to the TPT menu"
@@ -95,10 +95,10 @@ class HQ(Cmd):
 		sub_cmd = operator()
 		sub_cmd.cmdloop()
 
-        def do_intel(self, arg):
-                "Go to the Intel menu"
-                sub_cmd = intel()
-                sub_cmd.cmdloop()
+	def do_intel(self, arg):
+		"Go to the Intel menu"
+		sub_cmd = intel()
+		sub_cmd.cmdloop()
 
 	def do_auxiliary(self, arg):
 		"Go to the Auxiliary Tools Menu"
@@ -128,34 +128,34 @@ class listeners(Cmd):
 		"Exit SABRE-OC"
 		quit()
 
-        def do_tpt(self, arg):
-                "Go to the TPT menu"
-                sub_cmd = TPT()
-                sub_cmd.cmdloop()
+	def do_tpt(self, arg):
+		"Go to the TPT menu"
+		sub_cmd = TPT()
+		sub_cmd.cmdloop()
 
-        def do_operator(self, arg):
-                "Go to the operator menu"
-                sub_cmd = operator()
-                sub_cmd.cmdloop()
+	def do_operator(self, arg):
+		"Go to the operator menu"
+		sub_cmd = operator()
+		sub_cmd.cmdloop()
 
-        def do_intel(self, arg):
-                "Go to the Intel menu"
-                sub_cmd = intel()
-                sub_cmd.cmdloop()
+	def do_intel(self, arg):
+		"Go to the Intel menu"
+		sub_cmd = intel()
+		sub_cmd.cmdloop()
 
-        def do_auxiliary(self, arg):
-                "Go to the Auxiliary Tools Menu"
-                sub_cmd = auxiliary()
-                sub_cmd.cmdloop()
+	def do_auxiliary(self, arg):
+		"Go to the Auxiliary Tools Menu"
+		sub_cmd = auxiliary()
+		sub_cmd.cmdloop()
 
-        def do_checkdb(self, arg):
-                "Check for connectivity to the DB"
-                global r
-                value = r.info()
-                if value:
-                        print("Connected!")
-                else:
-                        print("Disconnected")
+	def do_checkdb(self, arg):
+		"Check for connectivity to the DB"
+		global r
+		value = r.info()
+		if value:
+			print("Connected!")
+		else:
+			print("Disconnected")
 
 
 #	def do_listListeners(self, cmd):            To add when SIMPLE uses REDIS
@@ -165,10 +165,10 @@ class listeners(Cmd):
 #		for i in result:
 #			print str(i) 
 
-        argparserlistener = argparse.ArgumentParser()
-        argparserlistener.add_argument('-p', '--lport', action="store_true", help='Listening Port')
-        argparserlistener.add_argument('l', '--lhost', action='store_true', help='Listening Host')
-        @with_argparser(argparserlistener)
+	argparserlistener = argparse.ArgumentParser()
+	argparserlistener.add_argument('-p', '--lport', action="store_true", help='Listening Port')
+	argparserlistener.add_argument('l', '--lhost', action='store_true', help='Listening Host')
+	@with_argparser(argparserlistener)
 	def do_start_listener(self, args, opts=None):
 		'Generates Basic LISTENER: listener -p 443 -l 0.0.0.0'
 		print(args)
@@ -189,106 +189,106 @@ class listeners(Cmd):
 		print(LHOST)
 		print(LPORT)
 
-        def do_native_http(self, args, opts=None):
-                'Start a Native Listener for HTTP Session; Default for port 80'
-                global r
-                LHOST = "0.0.0.0"
-                LPORT = input('Port to listen on:[80] ') or int('80')
-                nListener = native(r, LHOST, LPORT)
-                nListener.screenNative()
-                print(LPORT)
+	def do_native_http(self, args, opts=None):
+		'Start a Native Listener for HTTP Session; Default for port 80'
+		global r
+		LHOST = "0.0.0.0"
+		LPORT = input('Port to listen on:[80] ') or int('80')
+		nListener = native(r, LHOST, LPORT)
+		nListener.screenNative()
+		print(LPORT)
 
-        def do_list_sessions(self, cmd):
-                'Get Running Listeners'
-                print('Getting Running Listeners')
-                try:
-                        l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
-                        li = l.split('\n')
-                        print('Remember to select a session all you need is the listener ID (msfconsole# or empire#)')
-                        for i in li:
-                                print(i)
-                except:
-                        print('No Active Sessions')
+	def do_list_sessions(self, cmd):
+		'Get Running Listeners'
+		print('Getting Running Listeners')
+		try:
+			l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
+			li = l.split('\n')
+			print('Remember to select a session all you need is the listener ID (msfconsole# or empire#)')
+			for i in li:
+				print(i)
+		except:
+			print('No Active Sessions')
 
-        def do_killsession(self, cmd):
-                'Kill an existing session: msfconsole1 or empire1 etc..'
-                try:
-                        l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
-                        li = l.split('\n')
-                        print('Remember to select a session. all you need is the listener ID (msfconsole# or empire#)')
-                        for i in li:
-                                print(i)
-                        s = input('Enter in session ID: ')
-                        subprocess.call(['tmux', 'kill-session', '-t', s])
-                except:
-                        print('No Active Sessions')
+	def do_killsession(self, cmd):
+		'Kill an existing session: msfconsole1 or empire1 etc..'
+		try:
+			l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
+			li = l.split('\n')
+			print('Remember to select a session. all you need is the listener ID (msfconsole# or empire#)')
+			for i in li:
+				print(i)
+			s = input('Enter in session ID: ')
+			subprocess.call(['tmux', 'kill-session', '-t', s])
+		except:
+			print('No Active Sessions')
 
-        def do_sessions(self, cmd):
-                'Interact with an existing session: msfconsole1 or empire1 etc..'
-                try:
-                        l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
-                        li = l.split('\n')
-                        print('Remember to select a session all you need is the listener ID (msfconsole# or empire#)')
-                        for i in li:
-                                print(i)
-                        s = input('Enter in session ID: ')
-                        subprocess.call(['tmux', 'attach', '-t', s])
-                except:
-                        print('No Active Sessions')
+	def do_sessions(self, cmd):
+		'Interact with an existing session: msfconsole1 or empire1 etc..'
+		try:
+			l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
+			li = l.split('\n')
+			print('Remember to select a session all you need is the listener ID (msfconsole# or empire#)')
+			for i in li:
+				print(i)
+			s = input('Enter in session ID: ')
+			subprocess.call(['tmux', 'attach', '-t', s])
+		except:
+			print('No Active Sessions')
 
 ##### ALIASES ######
-        do_interact = do_sessions
-        do_list = do_list_sessions
+	do_interact = do_sessions
+	do_list = do_list_sessions
 
 
 class TPT(Cmd):
-        prompt = 'OC-Third-Party-Tools: '
-        intro = "Who Dares Wins: Who Works Together Wins"
+	prompt = 'OC-Third-Party-Tools: '
+	intro = "Who Dares Wins: Who Works Together Wins"
 
-        def __init__(self): #, teamserver):
-                Cmd.__init__(self)
+	def __init__(self): #, teamserver):
+		Cmd.__init__(self)
 
 	def do_exit(self, arg):
 		"Exit SABRE-OC"
 		quit()
 
-        def do_list_sessions(self, cmd):
-                'Get Running Listeners'
-                print('Getting Running Listeners')
-                try:
-                        l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
-                        li = l.split('\n')
-                        print('Remember to select a session all you need is the listener ID (msfconsole# or empire#)')
-                        for i in li:
-                                print(i)
-                except:
-                        print('No Active Sessions')
+	def do_list_sessions(self, cmd):
+		'Get Running Listeners'
+		print('Getting Running Listeners')
+		try:
+			l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
+			li = l.split('\n')
+			print('Remember to select a session all you need is the listener ID (msfconsole# or empire#)')
+			for i in li:
+				print(i)
+		except:
+			print('No Active Sessions')
 
-        def do_killsession(self, cmd):
-                'Kill an existing session: msfconsole1 or empire1 etc..'
-                try:
-                        l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
-                        li = l.split('\n')
-                        print('Remember to select a session. all you need is the listener ID (msfconsole# or empire#)')
-                        for i in li:
-                                print(i)
-                        s = input('Enter in session ID: ')
-                        subprocess.call(['tmux', 'kill-session', '-t', s])
-                except:
-                        print('No Active Sessions')
+	def do_killsession(self, cmd):
+		'Kill an existing session: msfconsole1 or empire1 etc..'
+		try:
+			l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
+			li = l.split('\n')
+			print('Remember to select a session. all you need is the listener ID (msfconsole# or empire#)')
+			for i in li:
+				print(i)
+			s = input('Enter in session ID: ')
+			subprocess.call(['tmux', 'kill-session', '-t', s])
+		except:
+			print('No Active Sessions')
 
-        def do_sessions(self, cmd):
-                'Interact with an existing session: msfconsole1 or empire1 etc..'
-                try:
-                        l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
-                        li = l.split('\n')
-                        print('Remember to select a session all you need is the listener ID (msfconsole# or empire#)')
-                        for i in li:
-                                print(i)
-                        s = input('Enter in session ID: ')
-                        subprocess.call(['tmux', 'attach', '-t', s])
-                except:
-                        print('No Active Sessions')
+	def do_sessions(self, cmd):
+		'Interact with an existing session: msfconsole1 or empire1 etc..'
+		try:
+			l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
+			li = l.split('\n')
+			print('Remember to select a session all you need is the listener ID (msfconsole# or empire#)')
+			for i in li:
+				print(i)
+			s = input('Enter in session ID: ')
+			subprocess.call(['tmux', 'attach', '-t', s])
+		except:
+			print('No Active Sessions')
 
 
 	def do_msfconsole(self, cmd):
@@ -302,40 +302,40 @@ class TPT(Cmd):
 		s = external(r, t, 42)
 		s.screenEXT()
 
-        def do_ptf(self, cmd):
-                'Start a PTF Session'
-                s = ptf(r, '0.0.0.0', 42)
-                s.screenPTF()
+	def do_ptf(self, cmd):
+		'Start a PTF Session'
+		s = ptf(r, '0.0.0.0', 42)
+		s.screenPTF()
 
-        def do_empire(self, cmd):
-                'Start a Empire Session'
-                s = empire(r, '0.0.0.0', 42)
-                s.screenEmpire()
+	def do_empire(self, cmd):
+		'Start a Empire Session'
+		s = empire(r, '0.0.0.0', 42)
+		s.screenEmpire()
 
-        def do_listener(self, arg):
-                "Go to the listener menu"
-                sub_cmd = listeners()
-                sub_cmd.cmdloop()
+	def do_listener(self, arg):
+		"Go to the listener menu"
+		sub_cmd = listeners()
+		sub_cmd.cmdloop()
 
-        def do_tpt(self, arg):
-                "Go to the TPT menu"
-                sub_cmd = TPT()
-                sub_cmd.cmdloop()
+	def do_tpt(self, arg):
+		"Go to the TPT menu"
+		sub_cmd = TPT()
+		sub_cmd.cmdloop()
 
-        def do_operator(self, arg):
-                "Go to the operator menu"
-                sub_cmd = operator()
-                sub_cmd.cmdloop()
+	def do_operator(self, arg):
+		"Go to the operator menu"
+		sub_cmd = operator()
+		sub_cmd.cmdloop()
 
-        def do_intel(self, arg):
-                "Go to the Intel menu"
-                sub_cmd = intel()
-                sub_cmd.cmdloop()
+	def do_intel(self, arg):
+		"Go to the Intel menu"
+		sub_cmd = intel()
+		sub_cmd.cmdloop()
 
-        def do_auxiliary(self, arg):
-                "Go to the Auxiliary Tools Menu"
-                sub_cmd = auxiliary()
-                sub_cmd.cmdloop()
+	def do_auxiliary(self, arg):
+		"Go to the Auxiliary Tools Menu"
+		sub_cmd = auxiliary()
+		sub_cmd.cmdloop()
 
 ##### ALIASES #####
 	do_interact = do_sessions
@@ -353,34 +353,34 @@ class operator(Cmd):
 		"Exit SABRE-OC"
 		quit()
 
-        def do_listener(self, arg):
-                "Go to the listener menu"
-                sub_cmd = listeners()
-                sub_cmd.cmdloop()
+	def do_listener(self, arg):
+		"Go to the listener menu"
+		sub_cmd = listeners()
+		sub_cmd.cmdloop()
 
-        def do_tpt(self, arg):
-                "Go to the TPT menu"
-                sub_cmd = TPT()
-                sub_cmd.cmdloop()
+	def do_tpt(self, arg):
+		"Go to the TPT menu"
+		sub_cmd = TPT()
+		sub_cmd.cmdloop()
 
-        def do_intel(self, arg):
-                "Go to the Intel menu"
-                sub_cmd = Intel()
-                sub_cmd.cmdloop()
+	def do_intel(self, arg):
+		"Go to the Intel menu"
+		sub_cmd = Intel()
+		sub_cmd.cmdloop()
 
-        def do_auxiliary(self, arg):
-                "Go to the Auxiliary Tools Menu"
-                sub_cmd = auxiliary()
-                sub_cmd.cmdloop()
+	def do_auxiliary(self, arg):
+		"Go to the Auxiliary Tools Menu"
+		sub_cmd = auxiliary()
+		sub_cmd.cmdloop()
 
-        def do_checkdb(self, arg):
-                "Check for connectivity to the DB"
-                global r
-                value = r.info()
-                if value:
-                        print("Connected!")
-                else:
-                        print("Disconnected")
+	def do_checkdb(self, arg):
+		"Check for connectivity to the DB"
+		global r
+		value = r.info()
+		if value:
+			print("Connected!")
+		else:
+			print("Disconnected")
 
 	def do_list(self, arg):
 		"List Available Native Operators (Implants)"
@@ -391,36 +391,36 @@ class operator(Cmd):
 	do_operators = do_list
 
 class intel(Cmd):
-        prompt = 'OC-Intel: '
-        intro = "Who Dares Wins: Who Knows Wins - Under Development"
+	prompt = 'OC-Intel: '
+	intro = "Who Dares Wins: Who Knows Wins - Under Development"
 
-        def __init__(self): #, teamserver):
-                Cmd.__init__(self)
-                #self.ts = teamserver
+	def __init__(self): #, teamserver):
+		Cmd.__init__(self)
+		#self.ts = teamserver
 
 	def do_exit(self, arg):
 		"Exit SABRE-OC"
 		quit()
 
-        def do_listener(self, arg):
-                "Go to the listener menu"
-                sub_cmd = listeners()
-                sub_cmd.cmdloop()
+	def do_listener(self, arg):
+		"Go to the listener menu"
+		sub_cmd = listeners()
+		sub_cmd.cmdloop()
 
-        def do_tpt(self, arg):
-                "Go to the TPT menu"
-                sub_cmd = TPT()
-                sub_cmd.cmdloop()
+	def do_tpt(self, arg):
+		"Go to the TPT menu"
+		sub_cmd = TPT()
+		sub_cmd.cmdloop()
 
-        def do_operator(self, arg):
-                "Go to the operator menu"
-                sub_cmd = operator()
-                sub_cmd.cmdloop()
+	def do_operator(self, arg):
+		"Go to the operator menu"
+		sub_cmd = operator()
+		sub_cmd.cmdloop()
 
-        def do_auxiliary(self, arg):
-                "Go to the Auxiliary Tools Menu"
-                sub_cmd = auxiliary()
-                sub_cmd.cmdloop()
+	def do_auxiliary(self, arg):
+		"Go to the Auxiliary Tools Menu"
+		sub_cmd = auxiliary()
+		sub_cmd.cmdloop()
 
 	def do_brief(self, arg):
 		"Print Link to Open Source Threat Intel"
@@ -430,58 +430,58 @@ class intel(Cmd):
 		except:
 			print('https://otx.alienvault.com/browse/industries/?sort=-created')
 
-        def do_checkdb(self, arg):
-                "Check for connectivity to the DB"
-                global r
-                value = r.info()
-                if value:
-                        print("Connected!")
-                else:
-                        print("Disconnected")
+	def do_checkdb(self, arg):
+		"Check for connectivity to the DB"
+		global r
+		value = r.info()
+		if value:
+			print("Connected!")
+		else:
+			print("Disconnected")
 
 ###### ALIASES ######
 
 class auxiliary(Cmd):
-        prompt = 'OC-AUX: '
-        intro = """Who Dares Wins: Who Has The Best Toys Wins
+	prompt = 'OC-AUX: '
+	intro = """Who Dares Wins: Who Has The Best Toys Wins
 This is a place holder for adding Auxiliary modules such as Exfil Tools"""
 
-        def __init__(self): #, teamserver):
-                Cmd.__init__(self)
-                #self.ts = teamserver
+	def __init__(self): #, teamserver):
+		Cmd.__init__(self)
+		#self.ts = teamserver
 
 	def do_exit(self, arg):
 		"Exit SABRE-OC"
 		quit()
 
-        def do_listener(self, arg):
-                "Go to the listener menu"
-                sub_cmd = listeners()
-                sub_cmd.cmdloop()
+	def do_listener(self, arg):
+		"Go to the listener menu"
+		sub_cmd = listeners()
+		sub_cmd.cmdloop()
 
-        def do_tpt(self, arg):
-                "Go to the TPT menu"
-                sub_cmd = TPT()
-                sub_cmd.cmdloop()
+	def do_tpt(self, arg):
+		"Go to the TPT menu"
+		sub_cmd = TPT()
+		sub_cmd.cmdloop()
 
-        def do_operator(self, arg):
-                "Go to the operator menu"
-                sub_cmd = operator()
-                sub_cmd.cmdloop()
+	def do_operator(self, arg):
+		"Go to the operator menu"
+		sub_cmd = operator()
+		sub_cmd.cmdloop()
 
-        def do_intel(self, arg):
-                "Go to the Intel menu"
-                sub_cmd = intel()
-                sub_cmd.cmdloop()
+	def do_intel(self, arg):
+		"Go to the Intel menu"
+		sub_cmd = intel()
+		sub_cmd.cmdloop()
 
-        def do_syslogdiscover(self, arg):
+	def do_syslogdiscover(self, arg):
        		"""
 Usage: syslogDiscover <PCAP FILE TO PARSE>
 
 This Tool was developed to identify Splunk instances on the network with out network scanning tools such as:
-        -nmap
-        -zenmap
-        -etc...
+	-nmap
+	-zenmap
+	-etc...
 
     This sould be ran with a PCAP file generated filtering only for SYSLOG traffic port 514
 
@@ -503,14 +503,14 @@ This Tool was developed to identify Splunk instances on the network with out net
     		except:
     		    print("error... try again")
 
-        def do_checkdb(self, arg):
-                "Check for connectivity to the DB"
-                global r
-                value = r.info()
-                if value:
-                        print("Connected!")
-                else:
-                        print("Disconnected")
+	def do_checkdb(self, arg):
+		"Check for connectivity to the DB"
+		global r
+		value = r.info()
+		if value:
+			print("Connected!")
+		else:
+			print("Disconnected")
 
 if __name__ == '__main__':
 	os.system('clear')
