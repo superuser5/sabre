@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import subprocess
-from settings import r
+from .settings import r
 
 class empire():
 
@@ -17,7 +17,7 @@ class empire():
                 self.ts.publish('Listeners', self.lid)
 
         def screenEmpire(self):
-                print 'Starting the empire in session'
+                print('Starting the empire in session')
                 try:
                         l = subprocess.check_output(['tmux', 'list-session'], shell=False)
                         li = l.split('\n')
@@ -38,10 +38,10 @@ class empire():
                         l = 'empty' #No sessions
                 # high number 
                 if 'empire' in l:
-                        print '''
+                        print('''
 ERROR! Already have one!:
-'''
-			print 'Due to empire behaving badly with more then run instence running at a time, We will have to share the current existing session already running. Teampire is in the works so hopefully this wont be an issue for long.'
+''')
+			print('Due to empire behaving badly with more then run instence running at a time, We will have to share the current existing session already running. Teampire is in the works so hopefully this wont be an issue for long.')
                 else:
                         subprocess.call(['/bin/bash', '-c', 'tmux new -s empire "clear && cd /pentest/post-exploitation/empire-py/ && empire"'])
 

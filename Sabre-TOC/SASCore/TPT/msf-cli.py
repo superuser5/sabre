@@ -3,13 +3,13 @@
 import getpass
 import sys
 import os
-import commands
+import subprocess
 from time import gmtime, strftime
 import re
 import pexpect, struct, fcntl, termios, signal
 import string
 
-u = commands.getstatusoutput('echo $SUDO_USER')[1]
+u = subprocess.getstatusoutput('echo $SUDO_USER')[1]
 #sd = commands.getstatusoutput('echo ~')
 #sd = sd[1]
 t = strftime("%d-%m-%Y_%H-%M-%S", gmtime())
@@ -32,7 +32,7 @@ def escape_ansi(line):
     return line2
 
 def escape_vt100(line):
-    line1 = commands.getstatusoutput('echo "%s" | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"' % line)[1]
+    line1 = subprocess.getstatusoutput('echo "%s" | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"' % line)[1]
     return line1
 
 def userCmdLog(cmd):
@@ -48,7 +48,7 @@ def userCmdLog(cmd):
 def outputCmdLog(cmd):
     cm = cmd#icm = re.sub(r'([^\s\w][\][/]|_)+', '', cmd, flags=re.UNICODE)
     printable = set(string.printable) #'''0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~'''#set(string.printable)
-    cm = ''.join(filter(lambda x: x in printable, cm))
+    cm = ''.join([x for x in cm if x in printable])
     cmd = escape_ansi(cm)
     #cm = escape_vt100(cm)
     ti = strftime("%d-%m-%Y %H-%M-%S", gmtime())
@@ -72,7 +72,7 @@ try:
     #sd = commands.getstatusoutput('echo ~')
     #sd = sd[1]
     s = pexpect.spawn("nc 127.0.0.1 55554")
-    sz = commands.getstatusoutput('stty size')
+    sz = subprocess.getstatusoutput('stty size')
     sz = sz[1]
     l = str(sz).split()[0]
     col = str(sz).split()[1]
@@ -84,11 +84,11 @@ try:
         s.sendline(p)
     elif index == 1 : 
         os.system('clear')
-        print outputCmdLog(s.before)
+        print(outputCmdLog(s.before))
     signal.signal(signal.SIGWINCH, sigwinch_passthrough)
     s.interact(input_filter=userCmdLog, output_filter=outputCmdLog)
     #f.close()
-    print "\nClosed Sabre! All sessions saved"
+    print("\nClosed Sabre! All sessions saved")
 except Exception as e:
     print("msf-cli failed on login.")
-    print e
+    print(e)

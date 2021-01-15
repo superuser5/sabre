@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from settings import r
+from .settings import r
 import subprocess
 import time
 
@@ -18,7 +18,7 @@ class msf():
 		self.ts.publish('Listeners', self.lid)
 
         def screenMSF(self):
-                print 'Starting the msfconsole in session'
+                print('Starting the msfconsole in session')
                 try:
                         l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
                         li = l.split('\n')
@@ -39,10 +39,10 @@ class msf():
                         l = 'empty' #No sessions
 		# high number
 		if 'msfconsole' in l:
-			print 'already have one'
+			print('already have one')
 			#subprocess.call(['screen', '-S', 'msfconsole%d' % int(nn), '-s', 'msfconsole'])
                         subprocess.call(['/bin/bash', '-c', 'tmux new -s msfconsole%d /opt/Sabre-TOC/SASCore/TPT/msf-cli.py' % int(nn)])
-			print 'msfconsole%d' % int(nn)
+			print('msfconsole%d' % int(nn))
 		else:
 			#subprocess.call(['screen', '-S', 'msfconsole', '-s', 'msfconsole'])
                         subprocess.call(["/bin/bash", "-c", "tmux new -s msfconsole /opt/Sabre-TOC/SASCore/TPT/msf-cli.py"])

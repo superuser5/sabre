@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-import commands
+import subprocess
 import sys
 import pexpect
 import json
@@ -17,24 +17,24 @@ passwd = args.passwd
 ip = args.server
 
 p = pexpect.spawn('msfrpc -U %s -P %s -a %s' % (u,passwd,ip))
-print 'Connecting'
+print('Connecting')
 p.expect('>>')
 #print 'Got Prompt'
 p.sendline("rpc.call('console.create')\n")
 p.expect('>>')
-print 'Ready'
+print('Ready')
 t = p.before.split('\n')
 t = t[1]
-print t
+print(t)
 t = t.split(',')
-print 'Console ID is: ' + t[0][11:-1]
+print('Console ID is: ' + t[0][11:-1])
 i = t[0][11:-1]        #raw_input('ID Number: ')
 prompt = 'msf5'
 p.sendline(r'rpc.call("console", "%s", "%s\n")' % (i,'\n'))
 p.sendline('rpc.call("console.read", "%s")' % i)
 
 while True:
-	c = raw_input("%s# " % prompt)
+	c = input("%s# " % prompt)
 	if c == 'exit':
 		exit()
 	s = r'rpc.call("console.write", "%s", "%s\n")' % (i,c)
@@ -53,4 +53,4 @@ while True:
 	d = o[0][11:]
 	d = d.split(r'\n')
 	for l in d:
-		print l
+		print(l)

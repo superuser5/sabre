@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import subprocess
-from settings import r
+from .settings import r
 
 class ptf():
 
@@ -17,7 +17,7 @@ class ptf():
                 self.ts.publish('Listeners', self.lid)
 
         def screenPTF(self):
-                print 'Starting the "PenTest Framework" in session'
+                print('Starting the "PenTest Framework" in session')
                 try:
                         l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
                         li = l.split('\n')
@@ -38,11 +38,11 @@ class ptf():
                         l = 'empty' #No sessions
                 # high number 
                 if 'ptf' in l:
-                        print '''
+                        print('''
 ERROR! Already have one!:
-'''
+''')
                         subprocess.call(["/bin/bash", "-c", "tmux new -s ptf%d 'clear && cd /root/ptf && ./ptf'" % int(nn)])
-                        print 'ptf%d' % int(nn)
+                        print('ptf%d' % int(nn))
                 else:
                         subprocess.call(["/bin/bash", "-c", "tmux new -s ptf 'clear && cd /root/ptf && ./ptf'"])
 

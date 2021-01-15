@@ -3,7 +3,7 @@
 import getpass
 import sys
 import os
-import commands
+import subprocess
 from time import gmtime, strftime, localtime
 import re
 import pexpect, struct, fcntl, termios, signal
@@ -12,8 +12,8 @@ import subprocess
 import sh
 #from multiprocessing import Process
 
-u = commands.getstatusoutput('whoami')[1]
-sd = commands.getstatusoutput('echo ~')
+u = subprocess.getstatusoutput('whoami')[1]
+sd = subprocess.getstatusoutput('echo ~')
 sd = sd[1]
 t = strftime("%d-%m-%Y_%H-%M-%S", localtime())
 f = open('%s/.sabre/%s-sabre.log' % (sd, t), 'w')
@@ -40,7 +40,7 @@ def escape_ansi(line):
     return line2
 
 def escape_vt100(line):
-    line1 = commands.getstatusoutput('echo "%s" | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"' % line)[1]
+    line1 = subprocess.getstatusoutput('echo "%s" | sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g"' % line)[1]
     return line1
 
 def userCmdLog(cmd):
@@ -122,19 +122,19 @@ def outputCmdLog(cmd):
 
 
 os.system('clear')
-b = commands.getstatusoutput('cat /opt/Sabre-TOC/sabres.txt')
+b = subprocess.getstatusoutput('cat /opt/Sabre-TOC/sabres.txt')
 b = b[1]
-print b
-v = commands.getstatusoutput('cat /opt/Sabre-TOC/version/version.txt')
+print(b)
+v = subprocess.getstatusoutput('cat /opt/Sabre-TOC/version/version.txt')
 v = v[1]
-print v
+print(v)
 
 try:
     t = strftime("%d-%m-%Y_%H-%M-%S", localtime())
-    sd = commands.getstatusoutput('echo ~')
+    sd = subprocess.getstatusoutput('echo ~')
     sd = sd[1]
     s = pexpect.spawn("sudo -E /opt/Sabre-TOC/main.py")
-    sz = commands.getstatusoutput('stty size')
+    sz = subprocess.getstatusoutput('stty size')
     sz = sz[1]
     l = str(sz).split()[0]
     col = str(sz).split()[1]
@@ -143,18 +143,18 @@ try:
     #sabreConnProc.start()
     #sabreNativeConnProc = Process(target=sabreNativeConnFunc)
     #sabreNativeConnProc.start()
-    print "Starting Sabre........."
+    print("Starting Sabre.........")
     index = s.expect(['password', 'OC'])
     if index == 0 :
         p = getpass.getpass()
         s.sendline(p)
     elif index == 1 : 
         os.system('clear')
-        print s.before
+        print(s.before)
     signal.signal(signal.SIGWINCH, sigwinch_passthrough)
     s.interact(input_filter=userCmdLog, output_filter=outputCmdLog)
     f.close()
-    print "\nClosed Sabre! All sessions saved"
+    print("\nClosed Sabre! All sessions saved")
 except Exception as e:
     print("s-cli failed on login.")
-    print e
+    print(e)

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from settings import r
+from .settings import r
 import subprocess
 import time
 
@@ -18,7 +18,7 @@ class shodan():
 		self.ts.publish('Listeners', self.lid)
 
         def screenShodan(self):
-                print 'Starting shodan CLI in session'
+                print('Starting shodan CLI in session')
                 try:
                         l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
                         li = l.split('\n')
@@ -38,12 +38,12 @@ class shodan():
                 except:
                         l = 'empty' #No sessions
 		# high number
-		print 'Attempting to start sessions for shodan!'
+		print('Attempting to start sessions for shodan!')
 		time.sleep(2)
 		if self.h in l:
-			print 'already have one'
+			print('already have one')
                         subprocess.call(['/bin/bash', '-c', 'tmux new -s shodan%d "shodan -h && /bin/bash"' % int(nn)])
-			print 'msfconsole%d' % int(nn)
+			print('msfconsole%d' % int(nn))
 		else:
                         subprocess.call(["/bin/bash", "-c", "tmux new -s shodan 'shodan -h && /bin/bash'" ])
 

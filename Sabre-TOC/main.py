@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from cmd2 import Cmd, with_argparser #, options
-import commands
+import subprocess
 import redis
 import os
 import atexit
@@ -50,41 +50,41 @@ class HQ(Cmd):
 
     	def do_list_sessions(self, cmd):
         	'Get Running Listeners'
-         	print 'Getting Running Listeners'
+         	print('Getting Running Listeners')
            	try:
                 	l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
                 	li = l.split('\n')
-                	print 'Remember to select a session all you need is the listener ID (msfconsole# or empire#)'
+                	print('Remember to select a session all you need is the listener ID (msfconsole# or empire#)')
                 	for i in li:
-                		print i
+                		print(i)
             	except:
-                	print 'No Active Sessions'
+                	print('No Active Sessions')
                     
         def do_killsession(self, cmd):
                 'Kill an existing session: msfconsole1 or empire1 etc..'
 		try:
                 	l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
                 	li = l.split('\n')
-                	print 'Remember to select a session. all you need is the listener ID (msfconsole# or empire#)'
+                	print('Remember to select a session. all you need is the listener ID (msfconsole# or empire#)')
                 	for i in li:
-                        	print i
-                	s = raw_input('Enter in session ID: ')
+                        	print(i)
+                	s = input('Enter in session ID: ')
                 	subprocess.call(['tmux', 'kill-session', '-t', s])
 		except:
-			print 'No Active Sessions'
+			print('No Active Sessions')
 
         def do_sessions(self, cmd):
                 'Interact with an existing session: msfconsole1 or empire1 etc..'
                 try:
                         l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
                         li = l.split('\n')
-                        print 'Remember to select a session all you need is the listener ID (msfconsole# or empire#)'
+                        print('Remember to select a session all you need is the listener ID (msfconsole# or empire#)')
                         for i in li:
-                                print i
-                        s = raw_input('Enter in session ID: ')
+                                print(i)
+                        s = input('Enter in session ID: ')
                         subprocess.call(['tmux', 'attach', '-t', s])
                 except:
-                        print 'No Active Sessions'
+                        print('No Active Sessions')
 
 	def do_tpt(self, arg):
 		"Go to the TPT menu"
@@ -111,9 +111,9 @@ class HQ(Cmd):
 		global r
 		value = r.info()
 		if value:
-			print "Connected!"
+			print("Connected!")
 		else:
-			print "Disconnected"
+			print("Disconnected")
 
 ##### ALIASES #####
 	do_list = do_list_sessions
@@ -154,9 +154,9 @@ class listeners(Cmd):
                 global r
                 value = r.info()
                 if value:
-                        print "Connected!"
+                        print("Connected!")
                 else:
-                        print "Disconnected"
+                        print("Disconnected")
 
 
 #	def do_listListeners(self, cmd):            To add when SIMPLE uses REDIS
@@ -172,7 +172,7 @@ class listeners(Cmd):
         @with_argparser(argparserlistener)
 	def do_start_listener(self, args, opts=None):
 		'Generates Basic LISTENER: listener -p 443 -l 0.0.0.0'
-		print args
+		print(args)
 		global r
 		if opts.lhost:
 			LHOST = opts.lhost
@@ -182,60 +182,60 @@ class listeners(Cmd):
 			LPORT = opts.lport
 		else:
 			LPORT = '443'
-		LHOST = raw_input('IP of server:[0.0.0.0] ') or str('0.0.0.0')
-		LPORT = raw_input('Port to listen on:[443] ') or int('443')
+		LHOST = input('IP of server:[0.0.0.0] ') or str('0.0.0.0')
+		LPORT = input('Port to listen on:[443] ') or int('443')
 		iListener = simple(r, LHOST, LPORT)
 		iListener.screenSimple()
 		#SASCore.simpleserver.simple.screen()
-		print LHOST
-		print LPORT
+		print(LHOST)
+		print(LPORT)
 
         def do_native_http(self, args, opts=None):
                 'Start a Native Listener for HTTP Session; Default for port 80'
                 global r
                 LHOST = "0.0.0.0"
-                LPORT = raw_input('Port to listen on:[80] ') or int('80')
+                LPORT = input('Port to listen on:[80] ') or int('80')
                 nListener = native(r, LHOST, LPORT)
                 nListener.screenNative()
-                print LPORT
+                print(LPORT)
 
         def do_list_sessions(self, cmd):
                 'Get Running Listeners'
-                print 'Getting Running Listeners'
+                print('Getting Running Listeners')
                 try:
                         l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
                         li = l.split('\n')
-                        print 'Remember to select a session all you need is the listener ID (msfconsole# or empire#)'
+                        print('Remember to select a session all you need is the listener ID (msfconsole# or empire#)')
                         for i in li:
-                                print i
+                                print(i)
                 except:
-                        print 'No Active Sessions'
+                        print('No Active Sessions')
 
         def do_killsession(self, cmd):
                 'Kill an existing session: msfconsole1 or empire1 etc..'
                 try:
                         l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
                         li = l.split('\n')
-                        print 'Remember to select a session. all you need is the listener ID (msfconsole# or empire#)'
+                        print('Remember to select a session. all you need is the listener ID (msfconsole# or empire#)')
                         for i in li:
-                                print i
-                        s = raw_input('Enter in session ID: ')
+                                print(i)
+                        s = input('Enter in session ID: ')
                         subprocess.call(['tmux', 'kill-session', '-t', s])
                 except:
-                        print 'No Active Sessions'
+                        print('No Active Sessions')
 
         def do_sessions(self, cmd):
                 'Interact with an existing session: msfconsole1 or empire1 etc..'
                 try:
                         l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
                         li = l.split('\n')
-                        print 'Remember to select a session all you need is the listener ID (msfconsole# or empire#)'
+                        print('Remember to select a session all you need is the listener ID (msfconsole# or empire#)')
                         for i in li:
-                                print i
-                        s = raw_input('Enter in session ID: ')
+                                print(i)
+                        s = input('Enter in session ID: ')
                         subprocess.call(['tmux', 'attach', '-t', s])
                 except:
-                        print 'No Active Sessions'
+                        print('No Active Sessions')
 
 ##### ALIASES ######
         do_interact = do_sessions
@@ -255,41 +255,41 @@ class TPT(Cmd):
 
         def do_list_sessions(self, cmd):
                 'Get Running Listeners'
-                print 'Getting Running Listeners'
+                print('Getting Running Listeners')
                 try:
                         l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
                         li = l.split('\n')
-                        print 'Remember to select a session all you need is the listener ID (msfconsole# or empire#)'
+                        print('Remember to select a session all you need is the listener ID (msfconsole# or empire#)')
                         for i in li:
-                                print i
+                                print(i)
                 except:
-                        print 'No Active Sessions'
+                        print('No Active Sessions')
 
         def do_killsession(self, cmd):
                 'Kill an existing session: msfconsole1 or empire1 etc..'
                 try:
                         l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
                         li = l.split('\n')
-                        print 'Remember to select a session. all you need is the listener ID (msfconsole# or empire#)'
+                        print('Remember to select a session. all you need is the listener ID (msfconsole# or empire#)')
                         for i in li:
-                                print i
-                        s = raw_input('Enter in session ID: ')
+                                print(i)
+                        s = input('Enter in session ID: ')
                         subprocess.call(['tmux', 'kill-session', '-t', s])
                 except:
-                        print 'No Active Sessions'
+                        print('No Active Sessions')
 
         def do_sessions(self, cmd):
                 'Interact with an existing session: msfconsole1 or empire1 etc..'
                 try:
                         l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
                         li = l.split('\n')
-                        print 'Remember to select a session all you need is the listener ID (msfconsole# or empire#)'
+                        print('Remember to select a session all you need is the listener ID (msfconsole# or empire#)')
                         for i in li:
-                                print i
-                        s = raw_input('Enter in session ID: ')
+                                print(i)
+                        s = input('Enter in session ID: ')
                         subprocess.call(['tmux', 'attach', '-t', s])
                 except:
-                        print 'No Active Sessions'
+                        print('No Active Sessions')
 
 
 	def do_msfconsole(self, cmd):
@@ -299,7 +299,7 @@ class TPT(Cmd):
 
 	def do_external(self, cmd):
 		'Start a any External Tool Session'
-		t = raw_input('Specify External Tool to run (Empyre, nmap, etc..): ') or 'exit'
+		t = input('Specify External Tool to run (Empyre, nmap, etc..): ') or 'exit'
 		s = external(r, t, 42)
 		s.screenEXT()
 
@@ -379,14 +379,14 @@ class operator(Cmd):
                 global r
                 value = r.info()
                 if value:
-                        print "Connected!"
+                        print("Connected!")
                 else:
-                        print "Disconnected"
+                        print("Disconnected")
 
 	def do_list(self, arg):
 		"List Available Native Operators (Implants)"
-		print "Print Usable Operators (Implants)"
-		print 'Currently we only have one native implannt'
+		print("Print Usable Operators (Implants)")
+		print('Currently we only have one native implannt')
 
 ##### ALIASES #####
 	do_operators = do_list
@@ -427,18 +427,18 @@ class intel(Cmd):
 		"Print Link to Open Source Threat Intel"
 		try:
 			subprocess.call(['firefox', 'https://otx.alienvault.com/browse/industries/?sort=-created', '&'])
-			print 'https://otx.alienvault.com/browse/industries/?sort=-created'
+			print('https://otx.alienvault.com/browse/industries/?sort=-created')
 		except:
-			print 'https://otx.alienvault.com/browse/industries/?sort=-created'
+			print('https://otx.alienvault.com/browse/industries/?sort=-created')
 
         def do_checkdb(self, arg):
                 "Check for connectivity to the DB"
                 global r
                 value = r.info()
                 if value:
-                        print "Connected!"
+                        print("Connected!")
                 else:
-                        print "Disconnected"
+                        print("Disconnected")
 
 ###### ALIASES ######
 
@@ -491,27 +491,27 @@ This Tool was developed to identify Splunk instances on the network with out net
     Author: Aidden Laoch
 
     		"""
-    		p = raw_input('Specify probable SYSLOG port used [514]: ') or '514'
-    		cap = raw_input('Specify pcap file to parse [pcap.pcap]: ') or 'pcap.pcap'
-    		TCP_REVERSE = dict((TCP_SERVICES[k], k) for k in TCP_SERVICES.keys())
+    		p = input('Specify probable SYSLOG port used [514]: ') or '514'
+    		cap = input('Specify pcap file to parse [pcap.pcap]: ') or 'pcap.pcap'
+    		TCP_REVERSE = dict((TCP_SERVICES[k], k) for k in list(TCP_SERVICES.keys()))
     		try:
     		    p = TCP_REVERSE[int(p)]
     		except:
-    		    print "Error: That port wasn't in the SCAPY service list"
+    		    print("Error: That port wasn't in the SCAPY service list")
     		try:
     		    pcapData = readpcap()
 		    pcapData.parseme(str(cap), p)
     		except:
-    		    print "error... try again"
+    		    print("error... try again")
 
         def do_checkdb(self, arg):
                 "Check for connectivity to the DB"
                 global r
                 value = r.info()
                 if value:
-                        print "Connected!"
+                        print("Connected!")
                 else:
-                        print "Disconnected"
+                        print("Disconnected")
 
 if __name__ == '__main__':
 	os.system('clear')

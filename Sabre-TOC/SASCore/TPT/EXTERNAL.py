@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from settings import r
+from .settings import r
 import subprocess
 import time
 
@@ -18,7 +18,7 @@ class external():
 		self.ts.publish('Listeners', self.lid)
 
         def screenEXT(self):
-                print 'Starting the %s in session' % self.h
+                print('Starting the %s in session' % self.h)
                 try:
                         l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
                         li = l.split('\n')
@@ -38,12 +38,12 @@ class external():
                 except:
                         l = 'empty' #No sessions
 		# high number
-		print 'Attempting to start sessions for requested tool!'
+		print('Attempting to start sessions for requested tool!')
 		time.sleep(2)
 		if self.h in l:
-			print 'already have one'
+			print('already have one')
                         subprocess.call(['/bin/bash', '-c', 'tmux new -s %s%d "/bin/bash"' % (self.h, int(nn))])
-			print '%s%d' % (self.h, int(nn))
+			print('%s%d' % (self.h, int(nn)))
 		else:
                         subprocess.call(["/bin/bash", "-c", "tmux new -s %s '/bin/bash'" % self.h ])
 

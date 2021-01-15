@@ -12,9 +12,9 @@ class readpcap():
         self.sysArgv2 = sysArgv2
 
     def helpme():
-        print '''
+        print('''
         usage: syslogDiscover <PCAP FILE TO PARSE> <Suspected SYSLOG PORT>
-        '''
+        ''')
         quit()
 
 
@@ -23,9 +23,9 @@ class readpcap():
         try:
             packets = rdpcap(pcapfile)
         except:
-            print '''
+            print('''
             Error loading pcap file. Try again
-            '''
+            ''')
             quit()
 
         pU = 'false'
@@ -42,14 +42,14 @@ class readpcap():
         t = len(packets) - 1
         c = 0
 
-        print '''
+        print('''
 ################################################################
    This Tool assumes that the pcap has only syslog ports used
        It also does not handle IPv6 traffic well.
 ################################################################
 
     LOADING..................................
-        '''
+        ''')
         time.sleep(10)
 
         for i in packets:
@@ -123,82 +123,82 @@ class readpcap():
         abnormRecv = list(set(abnormRecv))
         aP = list(set(aP))
     
-        print '''
+        print('''
     
 
-        '''    
+        ''')    
     
-        print '''
+        print('''
 ################################
    Layer 2 Protocols Detected
 ################################
-        '''
+        ''')
 
         if pU == 'true':
-            print "UDP Protocol Detected"
+            print("UDP Protocol Detected")
         if pT == 'true':
-            print 'TCP Protocol Detected'
+            print('TCP Protocol Detected')
         if pA == 'true':
-            print "Non-TCP or UDP Protocols Detected"
+            print("Non-TCP or UDP Protocols Detected")
 
-        print '''
+        print('''
 #####################################
    Actual PORTS/Protocols Detected
 #####################################
-        '''
+        ''')
         if len(aP) > 0:
             for i in aP:
-                print i
+                print(i)
 
-        print '''
+        print('''
 ###########################################
    Possible Syslog Forwarders or Clients
 ###########################################
-        '''
+        ''')
         for i in syslogClient:
-            print i
+            print(i)
 
-        print '''
+        print('''
 #################################################
    Possible Syslog Server or Aggregation Hosts
 #################################################
-        '''
+        ''')
         for i in syslogServer:
-            print i
+            print(i)
 
-        print '''
+        print('''
 ################################################
    Possible Abnormal Traffic Producing Hosts
 ################################################
-        '''
+        ''')
         for i in abnormSend:
-            print i
+            print(i)
 
-        print '''
+        print('''
 ################################################
    Possible Abnormal Traffic Recieving Hosts
 ################################################
-        '''
+        ''')
         for i in abnormRecv:
-            print i
+            print(i)
 
-        print '''
+        print('''
 
 
-        '''
+        ''')
 
 def main(pcapf):
     pcapData = readpcap()
     pcapData.parseme(pcapf)
 
 def helpme():
-    print '''
+    print('''
     usage: syslogDiscover <PCAP FILE TO PARSE>
-    '''
+    ''')
     quit()
 
 if __name__ == "__main__":
-    print '''
+    print('''
 This Tool was developed to identify Splunk instances on the network with out network scanning tools such as:
         -nmap
         -zenmap
@@ -211,7 +211,7 @@ This Tool was developed to identify Splunk instances on the network with out net
     Author: Austin James Scott
     Email: austin.j.scott@lmco.com
 
-    '''
+    ''')
     if len(sys.argv) < 3:
         sysArgv2 = '514'
     else:
@@ -220,11 +220,11 @@ This Tool was developed to identify Splunk instances on the network with out net
         helpme()
     if sys.argv[1] == '-h':
         helpme()
-    TCP_REVERSE = dict((TCP_SERVICES[k], k) for k in TCP_SERVICES.keys())
+    TCP_REVERSE = dict((TCP_SERVICES[k], k) for k in list(TCP_SERVICES.keys()))
     try:
         sysArgv2 = TCP_REVERSE[int(sysArgv2)]
     except:
-        print "Error: That port wasn't in the SCAPY service list"
+        print("Error: That port wasn't in the SCAPY service list")
         quit()
     pcapf = sys.argv[1]
     try:

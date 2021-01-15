@@ -17,8 +17,8 @@ class screenit():
 		child.send(' ');
 		child.send("ls");
 		child.expect('@%s' % host);
-		print(child.before)
-		print('@%s' % host);
+		print((child.before))
+		print(('@%s' % host));
 
 	def screenutil(self):
 		host = socket.gethostname()
@@ -29,8 +29,8 @@ class screenit():
 		s.enable_logs()
 		s.send_commands("df")
 		s.expect('\@%s' % host)
-		print(s.before)
-		print next(s.logs)
+		print((s.before))
+		print(next(s.logs))
 
 if __name__ == "__main__":
 	inst = screenit()
