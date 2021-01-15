@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from cmd2 import Cmd, with_argparser #, options
+from cmd2 import Cmd, with_argparser 
 import argparse
 import subprocess
 import redis
@@ -186,7 +186,6 @@ class listeners(Cmd):
 		LPORT = input('Port to listen on:[443] ') or int('443')
 		iListener = simple(r, LHOST, LPORT)
 		iListener.screenSimple()
-		#SASCore.simpleserver.simple.screen()
 		print(LHOST)
 		print(LPORT)
 
