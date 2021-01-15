@@ -7,7 +7,7 @@ import subprocess
 class lightSabre():
 
 	def __init__(self, teamserver, HOST, PORT):
-        	self.ts = teamserver
+			self.ts = teamserver
 		self.h = HOST
 		self.p = PORT
 		self.lid = "%s:%s" % (HOST,PORT)
@@ -27,30 +27,30 @@ class lightSabre():
 	def screenLightSabre(self):
 		print('Starting the light-sabre listener in session')
 		try:
-                	l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
-                	li = l.split('\n')
-                	n = []
-                	for i in li:
-                        	if 'light-sabre' in i:
-                                	n.append(i.split('light-sabre')[1])
-                	c = 0
-                	nu = []
-                	for i in n:
-                        	if ':' not in i[0]:
-                                	nu.append(i[0])
-                        	else:
-                                	nu.append(str(0))
-                	if nu:
-                        	nn = str(int(max(nu)) + 1)
+					l = subprocess.check_output(['tmux', 'list-sessions'], shell=False)
+					li = l.split('\n')
+					n = []
+					for i in li:
+							if 'light-sabre' in i:
+									n.append(i.split('light-sabre')[1])
+					c = 0
+					nu = []
+					for i in n:
+							if ':' not in i[0]:
+									nu.append(i[0])
+							else:
+									nu.append(str(0))
+					if nu:
+							nn = str(int(max(nu)) + 1)
 		except:
 			l = 'empty' #No sessions
-                # high number 
-                if 'light-sabre' in l:
-                        print('already have one')
-                        subprocess.call(['/bin/bash', '-c', 'tmux new -s light-sabre%d "clear && /opt/Sabre-TOC/light-sabre/lightsabre-server.py "' % int(nn)])
-                        print('light-sabre%d' % int(nn))
-                else:
-                        subprocess.call(['/bin/bash', '-c', 'tmux new -s light-sabre "clear && /opt/Sabre-TOC/light-sabre/lightsabre-server.py "'])
+				# high number 
+				if 'light-sabre' in l:
+						print('already have one')
+						subprocess.call(['/bin/bash', '-c', 'tmux new -s light-sabre%d "clear && /opt/Sabre-TOC/light-sabre/lightsabre-server.py "' % int(nn)])
+						print('light-sabre%d' % int(nn))
+				else:
+						subprocess.call(['/bin/bash', '-c', 'tmux new -s light-sabre "clear && /opt/Sabre-TOC/light-sabre/lightsabre-server.py "'])
 
 	def startNative(self): # Template to start migrating simple over to REDIS
 		#HOST = ''                 # '' means bind to all interfaces
@@ -93,7 +93,7 @@ class lightSabre():
 				conn.send(str(command)) 
 				break
 			# if we specify back then break out of loop and close socket
-                        if command == "back ": break
+						if command == "back ": break
 			# receive output from linux command
 			data = conn.recv(1024)
 			# print the output of the linux command
