@@ -496,12 +496,12 @@ This Tool was developed to identify Splunk instances on the network with out net
 		try:
 			p = TCP_REVERSE[int(p)]
 		except:
-	    		print("Error: That port wasn't in the SCAPY service list")
-    		try:
-	    		pcapData = readpcap()
+			print("Error: That port wasn't in the SCAPY service list")
+		try:
+			pcapData = readpcap()
 			pcapData.parseme(str(cap), p)
-    		except:
-	    		print("error... try again")
+		except:
+			print("error... try again")
 
 	def do_checkdb(self, arg):
 		"Check for connectivity to the DB"
