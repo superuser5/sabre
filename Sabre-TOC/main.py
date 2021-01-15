@@ -475,7 +475,7 @@ This is a place holder for adding Auxiliary modules such as Exfil Tools"""
 		sub_cmd.cmdloop()
 
 	def do_syslogdiscover(self, arg):
-       		"""
+		"""
 Usage: syslogDiscover <PCAP FILE TO PARSE>
 
 This Tool was developed to identify Splunk instances on the network with out network scanning tools such as:
@@ -489,19 +489,19 @@ This Tool was developed to identify Splunk instances on the network with out net
 
     Author: Aidden Laoch
 
-    		"""
-		    p = input('Specify probable SYSLOG port used [514]: ') or '514'
-		    cap = input('Specify pcap file to parse [pcap.pcap]: ') or 'pcap.pcap'
-		    TCP_REVERSE = dict((TCP_SERVICES[k], k) for k in list(TCP_SERVICES.keys()))
-		    try:
-			    p = TCP_REVERSE[int(p)]
-		    except:
-	    		    print("Error: That port wasn't in the SCAPY service list")
-    		    try:
-	    		    pcapData = readpcap()
-			    pcapData.parseme(str(cap), p)
-    		    except:
-	    		    print("error... try again")
+		"""
+		p = input('Specify probable SYSLOG port used [514]: ') or '514'
+		cap = input('Specify pcap file to parse [pcap.pcap]: ') or 'pcap.pcap'
+		TCP_REVERSE = dict((TCP_SERVICES[k], k) for k in list(TCP_SERVICES.keys()))
+		try:
+			p = TCP_REVERSE[int(p)]
+		except:
+	    		print("Error: That port wasn't in the SCAPY service list")
+    		try:
+	    		pcapData = readpcap()
+			pcapData.parseme(str(cap), p)
+    		except:
+	    		print("error... try again")
 
 	def do_checkdb(self, arg):
 		"Check for connectivity to the DB"
