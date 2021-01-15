@@ -44,13 +44,13 @@ class native():
 							nn = str(int(max(nu)) + 1)
 		except:
 			l = 'empty' #No sessions
-				# high number 
-				if 'native' in l:
-						print('already have one')
-						subprocess.call(['/bin/bash', '-c', 'tmux new -s native%d "clear && /opt/Sabre-TOC/SASCore/Listeners/native.py %s"' % (int(nn), self.p)])
-						print('simple%d' % int(nn))
-				else:
-						subprocess.call(['/bin/bash', '-c', 'tmux new -s native "clear && /opt/Sabre-TOC/SASCore/Listeners/native.py %s"' % self.p])
+			# high number 
+			if 'native' in l:
+					print('already have one')
+					subprocess.call(['/bin/bash', '-c', 'tmux new -s native%d "clear && /opt/Sabre-TOC/SASCore/Listeners/native.py %s"' % (int(nn), self.p)])
+					print('simple%d' % int(nn))
+			else:
+					subprocess.call(['/bin/bash', '-c', 'tmux new -s native "clear && /opt/Sabre-TOC/SASCore/Listeners/native.py %s"' % self.p])
 
 	def startNative(self): # Template to start migrating simple over to REDIS
 		#HOST = ''                 # '' means bind to all interfaces
