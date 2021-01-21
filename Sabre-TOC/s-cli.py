@@ -74,7 +74,7 @@ def userCmdLog(cmd):
 def outputCmdLog(cmd):
     global pmt
     global logme
-    cm = cmd
+    cm = str(cmd, 'utf-8')
     cm = escape_ansi(cm)
     ti = strftime("%d-%m-%Y %H:%M:%S", localtime())
     if 'OC' not in cm:
