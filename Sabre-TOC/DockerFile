@@ -1,0 +1,4 @@
+FROM kalilinux/kali-rolling
+SHELL ['apt', 'update']
+SHELL ['apt', 'install', '-y', 'git']
+SHELL ['git', 'clone', 'http://github.com/aidden-laoch/sabre', '/opt/sabre']
