@@ -25,14 +25,14 @@ mkdir -p /home/root/.sabre/
 
 #add-apt-repository -y ppa:webupd8team/java
 
-apt update
+apt update -y
 sleep 2
-apt install -y redis-server python-redis openssh-server nmap git python-pip3 openssh-server screen tmux moreutils python3-venv #oracle-java8-installer if we add MSF back to the main installer
+apt install -y redis-server python-redis openssh-server nmap git python-pip3 openssh-server screen tmux moreutils python3-venv -y #oracle-java8-installer if we add MSF back to the main installer
 sleep 2
 ##apt-get update
 apt upgrade
 sleep 2
-apt install -y build-essential libreadline-dev libssl-dev libpq5 libpq-dev libreadline5 libsqlite3-dev libpcap-dev git-core autoconf postgresql pgadmin3 curl zlib1g-dev libxml2-dev libxslt1-dev vncviewer libyaml-dev curl zlib1g-dev
+apt install -y build-essential libreadline-dev libssl-dev libpq5 libpq-dev libreadline5 libsqlite3-dev libpcap-dev git-core autoconf postgresql pgadmin3 curl zlib1g-dev libxml2-dev libxslt1-dev vncviewer libyaml-dev curl zlib1g-dev -y
 sleep 1
 #echo '''
 
