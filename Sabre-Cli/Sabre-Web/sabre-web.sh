@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#cd /opt/Sabre-Cli/Sabre-Web/
+cd /opt/Sabre-Cli/Sabre-Web/
 
 read -p 'Username: ' user
 read -p 'TOC Server: ' server
