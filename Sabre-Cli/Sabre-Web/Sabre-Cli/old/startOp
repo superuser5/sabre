@@ -1,0 +1,28 @@
+#!/bin/bash
+
+export PYTHONPATH=~/Sabre-Cli/
+
+read -p 'Enter IP for TOC: ' TOC
+read -p 'Enter PORT for TOC [6379]: ' TOCP
+read -p 'Enter a Screen Name: ' screenname
+read -p 'Enter a Team Room: ' teamroom
+read -p 'Enter TOC Password: ' passme
+
+export TOC=$TOC
+export TOCP=$TOCP
+export sabreS=$screenname
+export sabreT=$teamroom
+export sabreP=$passme
+
+echo 'export TOC=$TOC' >> ~/.bashrc
+echo 'export TOCP=$TOCP' >> ~/.bashrc
+echo 'export sabreS=$screenname' >> ~/.bashrc
+echo 'export sabreT=$teamroom' >> ~/.bashrc
+echo 'export sabreP=$passme' >> ~/.bashrc
+
+
+nohup terminator -l sabre-cli > /dev/null &
+sleep 1
+exit
+
+
