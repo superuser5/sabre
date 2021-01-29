@@ -94,7 +94,7 @@ sleep 3
 
 #pip3 install --upgrade pip3
 
-pip3 install -r pip3-install-me.txt
+server/bin/pip3 install -r pip3-install-me.txt
 #pip3 install covertutils
 #pip3 install cmd2==0.7.9
 #pip3 install pexpect
