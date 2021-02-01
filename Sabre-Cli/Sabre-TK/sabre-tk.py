@@ -41,7 +41,7 @@ style = ttk.Style(root)
 
 tocConnFrame = ttk.Frame(root)
 tocConnFrame.pack(side="bottom", fill="both", expand=True)
-toc_connections = tk.Frame(tocConnFrame)
+toc_connections = tk.Text(tocConnFrame)
 toc_connections.insert("1.0", "Connections to TOC's listed below........")
 toc_connections["state"] = "disabled"
 #toc_connections.pack(side='top', fill="both", ipadx=(5), ipady=(5), expand=True)
