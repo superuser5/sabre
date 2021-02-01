@@ -1,0 +1,3 @@
+multiprocess
+pillow #PIL
+tkinter
