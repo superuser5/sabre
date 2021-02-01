@@ -21,8 +21,8 @@ def sabreClient(*args):
 #def startClient(u,s):
 def startClient(*args):
     try:
-        server = toc_IP_Entry.get('1.0', 'End')
-        user = toc_User_Entry.get('1.0', 'End')
+        server = toc_IP_Entry.get()
+        user = toc_User_Entry.get()
     except ValueError:
         pass
     #start terminal with sabre-cli in seperate window with multiprocess
