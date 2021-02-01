@@ -13,9 +13,12 @@ tocConnections = ''
 
 #def sabreClient(u,s):
 def sabreClient(*args):
-    user = u
-    server = s
-    os.system('/usr/bin/qterminal -e sabre-cli -u %s -s %s' % (user,server))
+    try:
+        server = toc_IP_Entry.get()
+        user = toc_User_Entry.get()
+        os.system('/usr/bin/qterminal -e sabre-cli -u %s -s %s' % (user,server))
+    except ValueError:
+        pass
 
 
 #def startClient(u,s):
