@@ -2,7 +2,7 @@
 
 import tkinter as tk
 from tkinter import ttk 
-from multiprocess import Process #needs pip installed
+from multiprocessing import Process #needs pip installed
 import os
 import subprocess
 #from PIL import Image, ImageTK # needs pip installed
