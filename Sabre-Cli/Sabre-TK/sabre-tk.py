@@ -77,8 +77,6 @@ toc_IP_Entry.focus()
 connect_button = ttk.Button(root, text="Connect", command=startClient)
 connect_button.pack(side="left", fill="both", expand=True)
 #getting contents of the IP and USER
-ip = toc_IP_Entry.get('1.0', 'End')
-user = toc_User_Entry.get('1.0', 'End')
 
 quit_button = ttk.Button(root, text="Quit", command=root.destroy)
 quit_button.pack(side="right", fill="both", expand=True)
