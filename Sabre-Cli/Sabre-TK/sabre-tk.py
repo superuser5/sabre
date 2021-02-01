@@ -12,18 +12,21 @@ tocUser = ''
 tocConnections = ''
 
 #def sabreClient(u,s):
-def sabreClient():
-    #user = u
-    #server = s
-    os.system('/usr/bin/qterminal')
+def sabreClient(*args):
+    user = u
+    server = s
+    os.system('/usr/bin/qterminal -e sabre-cli -u %s -s %s' % (user,server))
 
 
 #def startClient(u,s):
-def startClient():
-    #user = u
-    #server = s 
+def startClient(*args):
+    try:
+        server = toc_IP_Entry.get('1.0', 'End')
+        user = toc_User_Entry.get('1.0', 'End')
+    except ValueError:
+        pass
     #start terminal with sabre-cli in seperate window with multiprocess
-    p = Process(target=sabreClient) #, args=('user','server'))
+    p = Process(target=sabreClient, args=('user','server'))
     p.start()
     #p.join()
     toc_connections["state"] = "normal"
@@ -74,8 +77,8 @@ toc_IP_Entry.focus()
 connect_button = ttk.Button(root, text="Connect", command=startClient)
 connect_button.pack(side="left", fill="both", expand=True)
 #getting contents of the IP and USER
-#ip = toc_IP_Entry.get('1.0', 'End')
-#user = toc_User_Entry.get('1.0', 'End')
+ip = toc_IP_Entry.get('1.0', 'End')
+user = toc_User_Entry.get('1.0', 'End')
 
 quit_button = ttk.Button(root, text="Quit", command=root.destroy)
 quit_button.pack(side="right", fill="both", expand=True)
