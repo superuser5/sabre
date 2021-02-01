@@ -23,17 +23,17 @@ def startClient(*args):
     try:
         server = toc_IP_Entry.get()
         user = toc_User_Entry.get()
+        #start terminal with sabre-cli in seperate window with multiprocess
+        p = Process(target=sabreClient, args=('user','server'))
+        p.start()
+        #p.join()
+        toc_connections["state"] = "normal"
+        toc_connections.delete("1.0", "end")
+        connectionstr = subprocess.check_output("netstat -punta | grep 22", shell=True)
+        toc_connections.insert("1.0", connectionstr)
+        toc_connections["state"] = "disabled"
     except ValueError:
         pass
-    #start terminal with sabre-cli in seperate window with multiprocess
-    p = Process(target=sabreClient, args=('user','server'))
-    p.start()
-    #p.join()
-    toc_connections["state"] = "normal"
-    toc_connections.delete("1.0", "end")
-    connectionstr = subprocess.check_output("netstat -punta | grep 22", shell=True)
-    toc_connections.insert("1.0", connectionstr)
-    toc_connections["state"] = "disabled"
 
 root = tk.Tk() 
 root.title("Sabre Client")
