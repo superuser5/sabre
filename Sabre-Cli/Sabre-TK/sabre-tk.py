@@ -32,7 +32,7 @@ def startClient(*args):
         #p.join()
         toc_connections["state"] = "normal"
         toc_connections.delete("1.0", "end")
-        connectionstr = subprocess.check_output("netstat -punta | grep 22", shell=True)
+        connectionstr = subprocess.check_output("netstat -unta | grep tcp | awk '{print $5}' | grep 22:", shell=True)
         toc_connections.insert("1.0", connectionstr)
         toc_connections["state"] = "disabled"
     except ValueError:
