@@ -1,9 +1,5 @@
 #!/bin/bash
 clear
-echo '''
-Run as ROOT!!! and Requires MSF and Empire to be installed before hand for now.
-MSF and Empire will be added to the installer soon!
-'''
 
 #export http_proxy = $1
 #export https_proxy = $1
@@ -23,32 +19,15 @@ fi
 
 mkdir -p /home/root/.sabre/
 
-#add-apt-repository -y ppa:webupd8team/java
 
 apt update -y
 sleep 2
 apt install -y redis-server python-redis openssh-server nmap git python-pip3 openssh-server screen tmux moreutils python3-venv -y #oracle-java8-installer if we add MSF back to the main installer
 sleep 2
-##apt-get update
 apt upgrade
 sleep 2
 apt install -y build-essential libreadline-dev libssl-dev libpq5 libpq-dev libsqlite3-dev libpcap-dev git-core autoconf postgresql curl zlib1g-dev libxml2-dev libxslt1-dev libyaml-dev curl zlib1g-dev -y #pgadmin3 vncviewer libreadline5
 sleep 1
-#echo '''
-
-################################
-# Installing Powershell Empire #      This will be changed to install from PTF
-################################
-#
-#'''
-
-#cd /opt
-#git clone https://github.com/EmpireProject/Empire.git
-#cd Empire
-#chmod +x ./setup/install.sh
-#./setup/install.sh
-#ln -s /opt/Empire/empire /usr/bin/empire
-#cd ~
 
 echo '''
 
@@ -65,7 +44,7 @@ bind-key C-a send-prefix
 ''' >> /root/.tmux.conf
 
 echo '''
-
+* need to make this an option
 #############################
 # Installing TrustedSec PTF # 
 #############################
@@ -90,16 +69,17 @@ echo '''
 #service ssh restart
 
 #debug
-sleep 3
+#sleep 3
 
-#pip3 install --upgrade pip3
+pip3 install --upgrade pip3
 
-server/bin/pip3 install -r pip3-install-me.txt
+pip3 install -r pip3-install-me.txt
 #pip3 install covertutils
 #pip3 install cmd2==0.7.9
 #pip3 install pexpect
 #pip3 install scapy
 
+# need to make this optional
 #snap install rocketchat-server
 
 #Need to fix these SED commands
@@ -109,13 +89,13 @@ ln -s $sd/update.sh /usr/bin/sabre-update
 #sed -i “s/bind\ 127.0.0.1/bind\ 127.0.0.1\ $ip/“ /etc/redis/redis.conf
 
 #debug
-sleep 3
+#sleep 3
 
 #Need to fix this one as well
 #sed -i “s/localhost/$ip/“ $d/SASCore/Listeners/settings.py
 
 #debug
-sleep 3
+#sleep 3
 
 
 #sed -i 's/localhost/$ip/' $d/SASCore//settings.py
