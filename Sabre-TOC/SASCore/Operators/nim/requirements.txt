@@ -1,0 +1,1 @@
+nim-strenc #forked repo to aidden-laoch but can be installed from original repo with "nimble install strenc"
